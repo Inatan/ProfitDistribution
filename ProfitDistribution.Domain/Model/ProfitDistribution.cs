@@ -2,7 +2,7 @@
 
 namespace ProfitDistribution.Domain.Model
 {
-    public class DistribuicaoLucro
+    public class ProfitDistribution
     {
         public IList<Participation> participacoes { get; set; }
         public readonly int total_de_funcionarios;
