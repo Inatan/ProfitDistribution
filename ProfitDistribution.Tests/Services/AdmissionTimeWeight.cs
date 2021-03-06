@@ -3,13 +3,13 @@ using ProfitDistribution.Services.Handlers;
 using System;
 using Xunit;
 
-namespace ProfitDistribution.Tests
+namespace ProfitDistribution.Tests.Services
 {
     public class AdmissionTimeWeight
     {
         private int ActAdmissionTimeWeight(Employee employee)
         {
-            Services.Handlers.AdmissionTimeWeight admissionTimeWeight = new Services.Handlers.AdmissionTimeWeight();
+            ProfitDistribution.Services.Handlers.AdmissionTimeWeight admissionTimeWeight = new ProfitDistribution.Services.Handlers.AdmissionTimeWeight();
             WeightCalculatorHandler calculatorHandler = new WeightCalculatorHandler();
             int weight = calculatorHandler.Calculate(admissionTimeWeight, employee);
             return weight;

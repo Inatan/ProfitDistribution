@@ -3,13 +3,13 @@ using ProfitDistribution.Services.Handlers;
 using System;
 using Xunit;
 
-namespace ProfitDistribution.Tests
+namespace ProfitDistribution.Tests.Services
 {
     public class AreaWeight
     {
         private int ActAreaWeight(Employee employee)
         {
-            Services.Handlers.AreaWeight areaWeight = new Services.Handlers.AreaWeight();
+            ProfitDistribution.Services.Handlers.AreaWeight areaWeight = new ProfitDistribution.Services.Handlers.AreaWeight();
             WeightCalculatorHandler calculatorHandler = new WeightCalculatorHandler();
             int weight = calculatorHandler.Calculate(areaWeight, employee);
             return weight;

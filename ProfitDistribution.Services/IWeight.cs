@@ -1,6 +1,6 @@
 ﻿using ProfitDistribution.Domain.Model;
 
-namespace ProfitDistribution.Services.Handlers
+namespace ProfitDistribution.Services
 {
     public interface IWeight
     {

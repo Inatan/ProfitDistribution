@@ -10,11 +10,11 @@
         }
 
         
-        public Participation(Employee employee, int WageWeight, int AreaWeight, int TimeWeight)
+        public Participation(Employee employee, int timeWeight, int areaWeight, int wageWeight)
         {
             matricula = employee.matricula;
             nome = employee.nome;
-            valor_da_participação = Calculate(employee.salario_bruto, TimeWeight, AreaWeight, WageWeight);
+            valor_da_participação = Calculate(employee.salario_bruto, timeWeight, areaWeight, wageWeight);
         }
 
         public Participation() { }
