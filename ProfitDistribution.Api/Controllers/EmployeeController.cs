@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProfitDistribution.Api.DTO;
 using ProfitDistribution.Api.Model;
+using ProfitDistribution.Domain.Model;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
 
@@ -19,10 +20,10 @@ namespace ProfitDistribution.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(statusCode: 200, Type = typeof(EmployeeDTO))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
-        [ProducesResponseType(statusCode: 404)]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var lista = new List<Employee>();
+            return Ok(lista);
         }
 
         [HttpGet("{id}")]
@@ -33,31 +34,66 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 200, Type = typeof(EmployeeDTO))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 404)]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            EmployeeDTO employee = null;
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return Ok(employee);
         }
 
         [HttpPost]
         [SwaggerOperation(Summary = "Registra novo funcionário na base.")]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(statusCode: 201, Type = typeof(EmployeeDTO))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
+        [ProducesResponseType(statusCode: 404)]
+        public IActionResult Post([FromBody] string value)
         {
+            if (ModelState.IsValid)
+            {
+                // Insert
+                Employee employee = null;
+                var uri = Url.Action("Recuperar", new { id = 1 });
+                return Created(uri, employee); // 201
+            }
+            return BadRequest();
         }
 
         [HttpPut("{id}")]
         [SwaggerOperation(
             Summary = "Atualizada dados de funcionário identificado por seu {id}."
         )]
-        public void Put(int id, [FromBody] string value)
+        [ProducesResponseType(statusCode: 200)]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
+        [ProducesResponseType(statusCode: 404)]
+        public IActionResult Put(int id, [FromBody] string value)
         {
+            if (ModelState.IsValid)
+            {
+                // Find By id
+                // Update
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]
         [SwaggerOperation(
             Summary = "Deleta funcionário identificado por seu {id}."
         )]
-        public void Delete(int id)
+        [ProducesResponseType(statusCode: 204)]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
+        [ProducesResponseType(statusCode: 404)]
+        public IActionResult Delete(int id)
         {
+            Employee employee = null;
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }
