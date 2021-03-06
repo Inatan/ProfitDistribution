@@ -89,7 +89,7 @@ namespace ProfitDistribution.Api.Controllers
         public IActionResult Delete(int id)
         {
             Employee employee = null;
-            if (model == null)
+            if (employee == null)
             {
                 return NotFound();
             }
