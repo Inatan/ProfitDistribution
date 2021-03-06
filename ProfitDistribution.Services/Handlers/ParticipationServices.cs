@@ -21,7 +21,7 @@ namespace ProfitDistribution.Services.Handlers
             return participation;
         }
 
-        public IEnumerable<Participation> GetParticipations(IEnumerable<Employee> employees)
+        public IEnumerable<Participation> GenerateParticipations(IEnumerable<Employee> employees)
         {
             List<Participation> participations = new List<Participation>();
             ParticipationServices services = new ParticipationServices();

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ProfitDistribution.Domain.Model
 {
-    public class ProfitDistribution
+    public class ProfitDistributionReport
     {
         
         public IList<Participation> participacoes { get; set; }
@@ -12,7 +12,7 @@ namespace ProfitDistribution.Domain.Model
         public decimal total_disponibilizado;
         public decimal saldo_total_disponibilizado;
 
-        public ProfitDistribution(IList<Participation> participacoes, decimal total_disponibilizado)
+        public ProfitDistributionReport(IList<Participation> participacoes, decimal total_disponibilizado)
         {
             this.participacoes = participacoes;
             this.total_disponibilizado = total_disponibilizado;

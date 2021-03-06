@@ -7,7 +7,7 @@ namespace ProfitDistribution.Services
     {
         Participation EmployeeToParticipation(Employee employee);
 
-        IEnumerable<Participation> GetParticipations(IEnumerable<Employee> employees);
+        IEnumerable<Participation> GenerateParticipations(IEnumerable<Employee> employees);
 
     }
 }
