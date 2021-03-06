@@ -1,28 +1,32 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using ProfitDistribution.Api.DTO;
-using System;
+using ProfitDistribution.Api.Model;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProfitDistribution.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class ProfitDistribuitionController : ControllerBase
+    [ApiVersion("1.0")]
+    [ApiExplorerSettings(GroupName = "v1")]
+    [Route("api/[controller]")]
+    public class ProfitDistribuitionReportController : ControllerBase
     {
         //private readonly ILogger<ProfitDistribuitionController> _logger;
         //ILogger<ProfitDistribuitionController> logger
         private readonly IMapper _mapper;
 
-        public ProfitDistribuitionController(IMapper mapper)
+        public ProfitDistribuitionReportController(IMapper mapper)
         {
             _mapper = mapper;
         }
 
-        [HttpPost]
+        [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(statusCode: 200, Type = typeof(DistributeWillDTO))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
+        [ProducesResponseType(statusCode: 404)]
         public async Task<IActionResult> RunProfitDistribuition([FromBody] IEnumerable<EmployeeDTO> employeeDTO)
         {
             if (ModelState.IsValid)
