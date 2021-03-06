@@ -2,11 +2,9 @@
 
 namespace ProfitDistribution.Services.Handlers
 {
-    public class WeightCalculatorHandler
+    public class WeightCalculatorServices : IWeightCalculatorServices
     {
-        public WeightCalculatorHandler() { }
-
-        public int Calculate(IWeight weight, Employee employee)
+        public int Calculate(IWeightServices weight, Employee employee)
         {
             return weight.Categorize(employee);
         }

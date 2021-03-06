@@ -9,8 +9,8 @@ namespace ProfitDistribution.Tests.Services
     {
         private int ActAdmissionTimeWeight(Employee employee)
         {
-            ProfitDistribution.Services.Handlers.AdmissionTimeWeight admissionTimeWeight = new ProfitDistribution.Services.Handlers.AdmissionTimeWeight();
-            WeightCalculatorHandler calculatorHandler = new WeightCalculatorHandler();
+            ProfitDistribution.Services.Handlers.AdmissionTimeWeightServices admissionTimeWeight = new ProfitDistribution.Services.Handlers.AdmissionTimeWeightServices();
+            WeightCalculatorServices calculatorHandler = new WeightCalculatorServices();
             int weight = calculatorHandler.Calculate(admissionTimeWeight, employee);
             return weight;
         }

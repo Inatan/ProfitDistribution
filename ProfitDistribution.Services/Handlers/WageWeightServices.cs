@@ -2,7 +2,7 @@
 
 namespace ProfitDistribution.Services.Handlers
 {
-    public class WageWeight : IWeight
+    public class WageWeightServices : IWeightServices
     {
         public int Categorize(Employee employee)
         {

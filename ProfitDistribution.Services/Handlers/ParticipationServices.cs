@@ -1,16 +1,17 @@
 ﻿using ProfitDistribution.Domain.Model;
+using System.Collections.Generic;
 
 namespace ProfitDistribution.Services.Handlers
 {
-    public class ParticipationServices
+    public class ParticipationServices : IParticipationServices
     {
         public Participation EmployeeToParticipation(Employee employee)
         {
-            WeightCalculatorHandler calculatorHandler = new WeightCalculatorHandler();
+            WeightCalculatorServices calculatorHandler = new WeightCalculatorServices();
 
-            AdmissionTimeWeight admissionWeight = new AdmissionTimeWeight();
-            AreaWeight areaWeight = new AreaWeight();
-            WageWeight wageWeight = new WageWeight();
+            AdmissionTimeWeightServices admissionWeight = new AdmissionTimeWeightServices();
+            AreaWeightServises areaWeight = new AreaWeightServises();
+            WageWeightServices wageWeight = new WageWeightServices();
 
             int admission = calculatorHandler.Calculate(admissionWeight, employee);
             int area = calculatorHandler.Calculate(areaWeight, employee);
@@ -20,6 +21,18 @@ namespace ProfitDistribution.Services.Handlers
             return participation;
         }
 
-        
+        public IEnumerable<Participation> GetParticipations(IEnumerable<Employee> employees)
+        {
+            List<Participation> participations = new List<Participation>();
+            ParticipationServices services = new ParticipationServices();
+            foreach (Employee employee in employees)
+            {
+                Participation participation = services.EmployeeToParticipation(employee);
+                participations.Add(participation);
+            }
+            return participations;
+        }
+
+
     }
 }

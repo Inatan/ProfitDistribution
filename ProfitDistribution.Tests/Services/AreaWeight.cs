@@ -9,8 +9,8 @@ namespace ProfitDistribution.Tests.Services
     {
         private int ActAreaWeight(Employee employee)
         {
-            ProfitDistribution.Services.Handlers.AreaWeight areaWeight = new ProfitDistribution.Services.Handlers.AreaWeight();
-            WeightCalculatorHandler calculatorHandler = new WeightCalculatorHandler();
+            ProfitDistribution.Services.Handlers.AreaWeightServises areaWeight = new ProfitDistribution.Services.Handlers.AreaWeightServises();
+            WeightCalculatorServices calculatorHandler = new WeightCalculatorServices();
             int weight = calculatorHandler.Calculate(areaWeight, employee);
             return weight;
         }

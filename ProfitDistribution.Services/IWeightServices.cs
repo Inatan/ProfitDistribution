@@ -2,7 +2,7 @@
 
 namespace ProfitDistribution.Services
 {
-    public interface IWeight
+    public interface IWeightServices
     {
         int Categorize(Employee employee);
     }
