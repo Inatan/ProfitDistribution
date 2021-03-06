@@ -6,13 +6,14 @@ namespace ProfitDistribution.Services.Handlers
     {
         public int Categorize(Employee employee)
         {
-            if (employee.admissionYear <= 1)
+            int admissionYear = employee.AdmissionYear();
+            if (admissionYear <= 1)
                 return 1;
-            else if (employee.admissionYear > 1 && employee.admissionYear <= 3)
+            else if (admissionYear > 1 && admissionYear <= 3)
                 return 2;
-            else if (employee.admissionYear > 3 && employee.admissionYear <= 8)
+            else if (admissionYear > 3 && admissionYear <= 8)
                 return 3;
-            else if (employee.admissionYear > 8)
+            else if (admissionYear > 8)
                 return 5;
             return 0;
         }

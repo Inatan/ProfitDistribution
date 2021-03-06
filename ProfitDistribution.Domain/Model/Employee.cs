@@ -4,7 +4,7 @@ namespace ProfitDistribution.Domain.Model
 {
     public class Employee
     {
-        public Employee(string matricula, string nome, string area, string cargo, string salario_bruto, DateTime data_de_admissao)
+        public Employee(string matricula, string nome, string area, string cargo, decimal salario_bruto, DateTime data_de_admissao)
         {
             this.matricula = matricula;
             this.nome = nome;
@@ -19,15 +19,17 @@ namespace ProfitDistribution.Domain.Model
         public string nome { get; set; }
         public string area { get; set; }
         public string cargo { get; set; }
-        public string salario_bruto { get; set; }
+        public decimal salario_bruto { get; set; }
         public DateTime data_de_admissao { get; set; }
 
-        public int admissionYear { 
-            get 
-            {
-                return DateTime.Today.Year - data_de_admissao.Year;
-            } 
+        public int AdmissionYear()
+        { 
+            return DateTime.Today.Year - data_de_admissao.Year;
         }
 
+        public int MeasureQuantityMinimalSalaries(decimal minimalSalary)
+        {
+            return Convert.ToInt32(Math.Truncate(salario_bruto / minimalSalary));
+        }
     }
 }
