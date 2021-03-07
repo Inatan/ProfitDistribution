@@ -27,14 +27,14 @@ namespace ProfitDistribution.Api.Controllers
             _logger = logger;
         }
 
-        private void logError()
+        private void logError(string msgIntro)
         {
             var errorList = ModelState.ToDictionary(
                    error => error.Key,
                    error => error.Value.Errors.Select(e => e.ErrorMessage).ToArray()
                 );
 
-            _logger.LogError($"Erro no envio de funcionário: {JsonConvert.SerializeObject(errorList)}");
+            _logger.LogError($"{msgIntro}: {JsonConvert.SerializeObject(errorList)}");
         }
 
         [HttpPost]
@@ -46,7 +46,7 @@ namespace ProfitDistribution.Api.Controllers
         {
             if (!ModelState.IsValid)
             {
-                logError();
+                logError("Erro no envio de valor para distribuir");
                 return BadRequest(ErrorResponse.FromModelState(ModelState));
             }
             

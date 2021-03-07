@@ -30,14 +30,14 @@ namespace ProfitDistribution.Api.Controllers
             _logger = logger;
         }
 
-        private void logError()
+        private void logError(string msgIntro)
         {
             var errorList = ModelState.ToDictionary(
                    error => error.Key,
                    error => error.Value.Errors.Select(e => e.ErrorMessage).ToArray()
                 );
 
-            _logger.LogError($"Erro no envio de funcionário: {JsonConvert.SerializeObject(errorList)}");
+            _logger.LogError($"{msgIntro}: {JsonConvert.SerializeObject(errorList)}");
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace ProfitDistribution.Api.Controllers
 
             if (!ModelState.IsValid)
             {
-                logError();
+                logError("Erro no envio de funcionário");
                 return BadRequest(ErrorResponse.FromModelState(ModelState));
             }
 
@@ -103,7 +103,7 @@ namespace ProfitDistribution.Api.Controllers
         {
             if (!ModelState.IsValid)
             {
-                logError();
+                logError("Erro no envio de funcionários");
                 return BadRequest(ErrorResponse.FromModelState(ModelState));
             }
             
@@ -117,7 +117,7 @@ namespace ProfitDistribution.Api.Controllers
 
         [HttpPut]
         [SwaggerOperation(
-            Summary = "Atualizada dados de funcionário identificado por seu {matricula}."
+            Summary = "Atualizada dados de funcionário identificado por sua {matricula}."
         )]
         [ProducesResponseType(statusCode: 200)]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
@@ -126,7 +126,7 @@ namespace ProfitDistribution.Api.Controllers
         {
             if (!ModelState.IsValid) 
             {
-                logError();
+                logError("Erro no envio de funcionário");
                 return BadRequest(ErrorResponse.FromModelState(ModelState));
             }
             var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
