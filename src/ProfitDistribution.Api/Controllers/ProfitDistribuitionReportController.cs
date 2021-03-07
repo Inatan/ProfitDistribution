@@ -2,11 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProfitDistribution.Api.DTO;
 using ProfitDistribution.Api.Model;
-using ProfitDistribution.Domain.Model;
-using ProfitDistribution.Infrastructure;
 using ProfitDistribution.Services;
-using System;
-using System.Globalization;
 using System.Threading.Tasks;
 
 namespace ProfitDistribution.Api.Controllers
@@ -18,13 +14,11 @@ namespace ProfitDistribution.Api.Controllers
     public class ProfitDistribuitionReportController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IRepository<Employee> _repo;
-        private readonly IParticipationServices _services;
+        private readonly IReportServices _services;
 
-        public ProfitDistribuitionReportController(IMapper mapper, IRepository<Employee> repo, IParticipationServices services)
+        public ProfitDistribuitionReportController(IMapper mapper, IReportServices services)
         {
             _mapper = mapper;
-            _repo = repo;
             _services = services;
         }
 
@@ -38,14 +32,10 @@ namespace ProfitDistribution.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
             
-            var dict = await _repo.GetAllAsync();
-            var participations = _services.GenerateParticipations(dict);
-            var provider = new CultureInfo("pt-BR");
-            decimal toDistribution = Decimal.Parse(distributeValueDTO.ValorDistribuir, NumberStyles.Currency, provider);
-            var report = new ProfitDistributionReport(participations, toDistribution);
+            var report = await _services.PresentReport(distributeValueDTO.ValorDistribuir);
             var reportDTO = _mapper.Map<ProfitDistributionReportDTO>(report);
+
             return Ok(reportDTO);
-            
         }
     }
 }

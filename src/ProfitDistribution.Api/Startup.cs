@@ -35,6 +35,10 @@ namespace ProfitDistribution.Api
             services.AddSingleton(context);
             services.AddTransient<IRepository<Employee>, RepositoryFirebase<Employee>>();
             services.AddTransient<IParticipationServices, ParticipationServices>();
+            services.AddTransient<IReportServices, ProfitDistributionReportServices>(); 
+            services.AddTransient<IEmployeeServices, EmployeeServices>(); 
+
+
             services.AddSingleton(AutoMapperSet());
 
 

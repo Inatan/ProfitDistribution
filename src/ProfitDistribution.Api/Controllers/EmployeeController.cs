@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProfitDistribution.Api.DTO;
 using ProfitDistribution.Api.Model;
 using ProfitDistribution.Domain.Model;
-using ProfitDistribution.Infrastructure;
+using ProfitDistribution.Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,13 +16,13 @@ namespace ProfitDistribution.Api.Controllers
     [Route("api/v1/[controller]")]
     public class EmployeeController : ControllerBase
     {
-        private readonly IRepository<Employee> _repo;
+        private readonly IEmployeeServices _services;
         private readonly IMapper _mapper;
 
 
-        public EmployeeController(IRepository<Employee> repository, IMapper mapper)
+        public EmployeeController(IEmployeeServices services, IMapper mapper)
         {
-            _repo = repository;
+            _services = services;
             _mapper = mapper;
         }
 
@@ -35,7 +35,7 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         public async Task<IActionResult> Get()
         {
-            var dict = await _repo.GetAllAsync();
+            var dict = await _services.GetAllEmployeesAsync();
             var dictDTO = _mapper.Map<IDictionary<string,EmployeeDTO>>(dict);
             return Ok(dictDTO);
         }
@@ -50,7 +50,7 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 404)]
         public async Task<IActionResult> Get(string matricula)
         {
-            var employee = await _repo.FindAsync(matricula);
+            var employee = await _services.FindByKeyAsync(matricula);
             var employeeDTO = _mapper.Map<EmployeeDTO>(employee);
             if (employee == null)
             {
@@ -71,7 +71,7 @@ namespace ProfitDistribution.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            await _repo.AddAsync(mappedEmployee.Matricula, mappedEmployee);
+            await _services.InsertNewAsync(mappedEmployee);
             var uri = Url.Action("Get", new { matricula = mappedEmployee.Matricula });
             return Created(uri, mappedEmployee);
             
@@ -89,7 +89,7 @@ namespace ProfitDistribution.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
             var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
-            await _repo.UpdateAsync(mappedEmployee.Matricula, mappedEmployee);
+            await _services.UpdateAsync(mappedEmployee);
             return Ok();
         }
 
@@ -102,12 +102,12 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 404)]
         public async Task<IActionResult> Delete(string matricula)
         {
-            var employee = await _repo.FindAsync(matricula);
+            var employee = await _services.FindByKeyAsync(matricula);
             if (employee == null)
             {
                 return NotFound();
             }
-            await _repo.RemoveAsync(matricula);
+            await _services.DeleteAsync(matricula);
             return NoContent();
         }
     }
