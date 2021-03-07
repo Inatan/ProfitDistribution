@@ -1,18 +1,30 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ProfitDistribution.Api.DTO;
 using ProfitDistribution.Api.Model;
 using ProfitDistribution.Domain.Model;
+using ProfitDistribution.Infrastructure;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProfitDistribution.Api.Controllers
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [ApiExplorerSettings(GroupName = "v1")]
+    //[ApiExplorerSettings(GroupName = "v1")]
     [Route("api/v1/[controller]")]
     public class EmployeeController : ControllerBase
     {
+        private readonly IRepository<Employee> _repo;
+        private readonly IMapper _mapper;
+
+
+        public EmployeeController(IRepository<Employee> repository, IMapper mapper)
+        {
+            _repo = repository;
+            _mapper = mapper;
+        }
+
         [HttpGet]
         [SwaggerOperation(
             Summary = "Recupera o lista de funcionários."
@@ -20,13 +32,13 @@ namespace ProfitDistribution.Api.Controllers
         [Produces("application/json")]
         [ProducesResponseType(statusCode: 200, Type = typeof(EmployeeDTO))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var lista = new List<Employee>();
+            var lista = await _repo.GetAllAsync();
             return Ok(lista);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{matricula}")]
         [SwaggerOperation(
             Summary = "Recupera o funcionário identificado por seu {id}."
         )]
@@ -34,9 +46,9 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 200, Type = typeof(EmployeeDTO))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 404)]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(string matricula)
         {
-            EmployeeDTO employee = null;
+            Employee employee = await _repo.FindAsync(matricula);
             if (employee == null)
             {
                 return NotFound();
@@ -49,50 +61,49 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 201, Type = typeof(EmployeeDTO))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 404)]
-        public IActionResult Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] EmployeeDTO employee)
         {
             if (ModelState.IsValid)
             {
-                // Insert
-                Employee employee = null;
-                var uri = Url.Action("Recuperar", new { id = 1 });
-                return Created(uri, employee); // 201
+                await _repo.AddAsync(employee.matricula, _mapper.Map<Employee>(employee));
+                var uri = Url.Action("Recuperar", new { matricula = employee.matricula });
+                return Created(uri, employee);
             }
             return BadRequest();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{matricula}")]
         [SwaggerOperation(
             Summary = "Atualizada dados de funcionário identificado por seu {id}."
         )]
         [ProducesResponseType(statusCode: 200)]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 404)]
-        public IActionResult Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put([FromBody] EmployeeDTO employee)
         {
             if (ModelState.IsValid)
             {
-                // Find By id
-                // Update
+                await _repo.UpdateAsync(employee.matricula, _mapper.Map<Employee>(employee));
                 return Ok();
             }
             return BadRequest();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{matricula}")]
         [SwaggerOperation(
             Summary = "Deleta funcionário identificado por seu {id}."
         )]
         [ProducesResponseType(statusCode: 204)]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 404)]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(string matricula)
         {
-            Employee employee = null;
+            var employee = await _repo.FindAsync(matricula);
             if (employee == null)
             {
                 return NotFound();
             }
+            await _repo.RemoveAsync(matricula);
             return NoContent();
         }
     }

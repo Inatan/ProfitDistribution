@@ -6,10 +6,10 @@ namespace ProfitDistribution.Infrastructure
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<IEnumerable<TEntity>> GetAll();
-        Task<TEntity> Find(string key);
-        Task Add(string key, params TEntity[] obj);
-        Task Change(string key,params TEntity[] obj);
-        Task Remove(string key);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<TEntity> FindAsync(string key);
+        Task AddAsync(string key, params TEntity[] obj);
+        Task UpdateAsync(string key,params TEntity[] obj);
+        Task RemoveAsync(string key);
     }
 }
