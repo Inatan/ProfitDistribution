@@ -12,6 +12,10 @@ using ProfitDistribution.Api.Filter;
 using ProfitDistribution.Api.Model;
 using ProfitDistribution.Domain.Model;
 using ProfitDistribution.Infrastructure;
+using ProfitDistribution.Services;
+using ProfitDistribution.Services.Handlers;
+using System;
+using System.Globalization;
 
 namespace ProfitDistribution.Api
 {
@@ -30,7 +34,8 @@ namespace ProfitDistribution.Api
             DistributionProfitContext context = new DistributionProfitContext();
             services.AddSingleton(context);
             services.AddTransient<IRepository<Employee>, RepositoryFirebase<Employee>>();
-            AutoMapperSet(services);
+            services.AddTransient<IParticipationServices, ParticipationServices>();
+            AutoMapperSet(ref services);
 
 
             //services.AddApiVersioning(options =>
@@ -88,21 +93,34 @@ namespace ProfitDistribution.Api
             });
         }
 
-        private void AutoMapperSet(IServiceCollection services)
+        private void AutoMapperSet(ref IServiceCollection services)
         {
             MapperConfiguration mapperConfiguration = new MapperConfiguration(config =>
-                config.CreateMap<EmployeeDTO, Employee>().ForMember(x => x.salario_bruto, y => y.MapFrom<SalaryResolver>())
+                config.CreateMap<EmployeeDTO, Employee>()
+                    .ForMember(employee => employee.salario_bruto, employeeDTO => employeeDTO.ConvertUsing(new DecimalValueConverter(), s => s.salario_bruto))
             );
             IMapper mapper = mapperConfiguration.CreateMapper();
             services.AddSingleton(mapper);
         }
     }
 
-    public class SalaryResolver : IValueResolver<EmployeeDTO, Employee, decimal>
+
+    public class DecimalTypeConverter : ITypeConverter<string, decimal>
     {
-        public decimal Resolve(EmployeeDTO source, Employee destination, decimal destMember, ResolutionContext context)
+        public decimal Convert(string source, decimal destination, ResolutionContext context)
         {
-            return  decimal.Parse(source.salario_bruto.Replace("R$" , "").Trim());
+            return Decimal.Parse(source, NumberStyles.Currency, CultureInfo.InvariantCulture);
         }
     }
+
+    public class DecimalValueConverter : IValueConverter<string, decimal>
+    {
+        public decimal Convert(string sourceMember, ResolutionContext context)
+        {
+            return 0.00M;
+        }
+    }
+
+
+
 }

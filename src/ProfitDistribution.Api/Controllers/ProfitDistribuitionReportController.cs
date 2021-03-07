@@ -2,7 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using ProfitDistribution.Api.DTO;
 using ProfitDistribution.Api.Model;
-using System.Collections.Generic;
+using ProfitDistribution.Domain.Model;
+using ProfitDistribution.Infrastructure;
+using ProfitDistribution.Services;
+using System;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace ProfitDistribution.Api.Controllers
@@ -16,23 +20,32 @@ namespace ProfitDistribution.Api.Controllers
         //private readonly ILogger<ProfitDistribuitionController> _logger;
         //ILogger<ProfitDistribuitionController> logger
         private readonly IMapper _mapper;
+        private readonly IRepository<Employee> _repo;
+        private readonly IParticipationServices _services;
 
-        public ProfitDistribuitionReportController(IMapper mapper)
+
+        public ProfitDistribuitionReportController(IMapper mapper, IRepository<Employee> repo, IParticipationServices services)
         {
             _mapper = mapper;
+            _repo = repo;
+            _services = services;
         }
 
         [HttpGet]
         [Produces("application/json")]
-        [ProducesResponseType(statusCode: 200, Type = typeof(DistributeWillDTO))]
+        [ProducesResponseType(statusCode: 200, Type = typeof(DistributeValueDTO))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 404)]
-        public async Task<IActionResult> RunProfitDistribuition([FromBody] IEnumerable<EmployeeDTO> employeeDTO)
+        public async Task<IActionResult> RunProfitDistribuition([FromBody] DistributeValueDTO distributeValueDTO)
         {
             if (ModelState.IsValid)
             {
-                //DTO
-                return Ok();
+                var dict = await _repo.GetAllAsync();
+                var participations = _services.GenerateParticipations(dict);
+                var provider = new CultureInfo("pt-BR");
+                decimal toDistribution = Decimal.Parse(distributeValueDTO.DistributeValue, NumberStyles.Currency, provider);
+                var report = new ProfitDistributionReport(participations, toDistribution);
+                return Ok(report);
             }
             return BadRequest();
             

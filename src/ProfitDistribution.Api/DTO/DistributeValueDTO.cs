@@ -2,9 +2,9 @@
 
 namespace ProfitDistribution.Api.DTO
 {
-    public class DistributeWillDTO
+    public class DistributeValueDTO
     {
         [Required]
-        public decimal DistributeValue { get; set; }
+        public string DistributeValue { get; set; }
     }
 }

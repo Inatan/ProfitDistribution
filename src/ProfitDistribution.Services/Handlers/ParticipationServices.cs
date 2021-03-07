@@ -21,11 +21,11 @@ namespace ProfitDistribution.Services.Handlers
             return participation;
         }
 
-        public IEnumerable<Participation> GenerateParticipations(IEnumerable<Employee> employees)
+        public IEnumerable<Participation> GenerateParticipations(IDictionary<string, Employee> employees)
         {
             List<Participation> participations = new List<Participation>();
             ParticipationServices services = new ParticipationServices();
-            foreach (Employee employee in employees)
+            foreach (Employee employee in employees.Values)
             {
                 Participation participation = services.EmployeeToParticipation(employee);
                 participations.Add(participation);
