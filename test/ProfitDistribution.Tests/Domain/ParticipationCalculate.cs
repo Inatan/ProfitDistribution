@@ -1,4 +1,5 @@
 ﻿using ProfitDistribution.Domain.Model;
+using ProfitDistribution.Infrastructure;
 using Xunit;
 
 namespace ProfitDistribution.Tests.Domain
@@ -16,5 +17,6 @@ namespace ProfitDistribution.Tests.Domain
             decimal participationValue = participation.Calculate(salary, timeWeight, areaWeight, wageWeight);
             Assert.Equal<decimal>(participationValue, expectedValue);
         }
+
     }
 }
