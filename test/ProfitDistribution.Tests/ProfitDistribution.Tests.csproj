@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProfitDistribution.Domain\ProfitDistribution.Domain.csproj" />
-    <ProjectReference Include="..\ProfitDistribution.Services\ProfitDistribution.Services.csproj" />
+    <ProjectReference Include="..\..\src\ProfitDistribution.Domain\ProfitDistribution.Domain.csproj" />
+    <ProjectReference Include="..\..\src\ProfitDistribution.Services\ProfitDistribution.Services.csproj" />
   </ItemGroup>
 
 </Project>

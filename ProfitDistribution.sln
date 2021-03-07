@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfitDistribution.Api", "ProfitDistribution.Api\ProfitDistribution.Api.csproj", "{DF56F52D-039B-4D8D-BD64-B4EE9E488701}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfitDistribution.Api", "src\ProfitDistribution.Api\ProfitDistribution.Api.csproj", "{DF56F52D-039B-4D8D-BD64-B4EE9E488701}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfitDistribution.Tests", "ProfitDistribution.Tests\ProfitDistribution.Tests.csproj", "{E38B5CDB-A811-4A9F-8646-79CE1375A95B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfitDistribution.Tests", "test\ProfitDistribution.Tests\ProfitDistribution.Tests.csproj", "{E38B5CDB-A811-4A9F-8646-79CE1375A95B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfitDistribution.Domain", "ProfitDistribution.Domain\ProfitDistribution.Domain.csproj", "{754ED940-D7D7-4F6A-9B28-B279B0AF4D31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfitDistribution.Domain", "src\ProfitDistribution.Domain\ProfitDistribution.Domain.csproj", "{754ED940-D7D7-4F6A-9B28-B279B0AF4D31}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfitDistribution.Services", "ProfitDistribution.Services\ProfitDistribution.Services.csproj", "{6F0A9800-28D8-41BD-AA19-79D089ECE5D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfitDistribution.Services", "src\ProfitDistribution.Services\ProfitDistribution.Services.csproj", "{6F0A9800-28D8-41BD-AA19-79D089ECE5D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{354D4DD9-B151-4133-9499-748602184847}"
 EndProject
