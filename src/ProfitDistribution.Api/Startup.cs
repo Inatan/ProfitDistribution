@@ -31,7 +31,7 @@ namespace ProfitDistribution.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            DistributionProfitContext context = new DistributionProfitContext();
+            DistributionProfitContext context = new DistributionProfitContext(Configuration["FirebaseConection:AuthSecret"], Configuration["FirebaseConection:BasePath"]);
             services.AddSingleton(context);
             services.AddTransient<IRepository<Employee>, RepositoryFirebase<Employee>>();
             services.AddTransient<IParticipationServices, ParticipationServices>();
