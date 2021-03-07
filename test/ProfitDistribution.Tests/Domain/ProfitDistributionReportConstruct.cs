@@ -17,9 +17,42 @@ namespace ProfitDistribution.Tests.Domain
             Dictionary<string,Employee> employees =
                 new Dictionary<string, Employee>
                 {
-                    { "0014319",new Employee("0014319", "Abraham Jones", "Diretoria", "Diretor Tecnologia", 18053.25M, new DateTime(2016, 07, 05)) },
-                    { "0004468",new Employee("0004468", "Flossie Wilson", "Contabilidade", "Auxiliar de Contabilidade", 1396.52M, new DateTime(2015, 01, 05)) },
-                    { "0002949",new Employee("0002949", "Stephenson Stone", "Financeiro", "Analista de Finanças", 5694.14M, new DateTime(2014, 01, 26))}
+                    {   
+                        "0014319",
+                        new Employee()
+                        {
+                           matricula = "0014319", 
+                           nome = "Abraham Jones", 
+                           area = "Diretoria", 
+                           cargo = "Diretor Tecnologia", 
+                           salario_bruto = 18053.25M, 
+                           data_de_admissao = new DateTime(2016, 07, 05) 
+                        } 
+                    },
+                    { 
+                        "0004468",
+                        new Employee()
+                        {
+                            matricula ="0004468",
+                            nome ="Flossie Wilson",
+                            area ="Contabilidade",
+                            cargo ="Auxiliar de Contabilidade",
+                            salario_bruto = 1396.52M,
+                            data_de_admissao = new DateTime(2015, 01, 05)
+                        }
+                    },
+                    { 
+                        "0002949",
+                        new Employee() 
+                        {
+                            matricula ="0002949",
+                            nome ="Stephenson Stone",
+                            area ="Financeiro",
+                            cargo ="Analista de Finanças", 
+                            salario_bruto =5694.14M, 
+                            data_de_admissao = new DateTime(2014, 01, 26) 
+                        }
+                    }
                 };
             decimal sumExpected = 427926.60M;
             decimal countExpeted = 3;

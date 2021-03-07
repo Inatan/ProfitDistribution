@@ -65,17 +65,7 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 404)]
         public async Task<IActionResult> Post([FromBody] EmployeeDTO employeeDTO)
         {
-            //var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
-            var provider = new CultureInfo("pt-BR");
-            var mappedEmployee = new Employee(
-                employeeDTO.matricula,
-                employeeDTO.nome,
-                employeeDTO.area,
-                employeeDTO.cargo,
-                Decimal.Parse(employeeDTO.salario_bruto, NumberStyles.Currency, provider),
-                employeeDTO.data_de_admissao
-                );
-
+            var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
 
             if (ModelState.IsValid)
             {
@@ -95,15 +85,7 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 404)]
         public async Task<IActionResult> Put([FromBody] EmployeeDTO employeeDTO)
         {
-            var provider = new CultureInfo("pt-BR");
-            var mappedEmployee = new Employee(
-                employeeDTO.matricula,
-                employeeDTO.nome,
-                employeeDTO.area,
-                employeeDTO.cargo,
-                Decimal.Parse(employeeDTO.salario_bruto, NumberStyles.Currency, provider),
-                employeeDTO.data_de_admissao
-                );
+            var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
             if (ModelState.IsValid)
             {
                 await _repo.UpdateAsync(mappedEmployee.matricula,mappedEmployee);

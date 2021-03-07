@@ -13,6 +13,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="xunit" Version="2.4.0" />
@@ -21,6 +22,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ProfitDistribution.Infrastructure\ProfitDistribution.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\ProfitDistribution.Api\ProfitDistribution.Api.csproj" />
     <ProjectReference Include="..\..\src\ProfitDistribution.Domain\ProfitDistribution.Domain.csproj" />
     <ProjectReference Include="..\..\src\ProfitDistribution.Services\ProfitDistribution.Services.csproj" />
   </ItemGroup>

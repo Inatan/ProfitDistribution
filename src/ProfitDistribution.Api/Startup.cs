@@ -95,9 +95,11 @@ namespace ProfitDistribution.Api
 
         private void AutoMapperSet(ref IServiceCollection services)
         {
+            var provider = new CultureInfo("pt-BR");
             MapperConfiguration mapperConfiguration = new MapperConfiguration(config =>
                 config.CreateMap<EmployeeDTO, Employee>()
-                    .ForMember(employee => employee.salario_bruto, employeeDTO => employeeDTO.ConvertUsing(new DecimalValueConverter(), s => s.salario_bruto))
+                    .ForMember(employee => employee.salario_bruto, 
+                    employeeDTO => employeeDTO.MapFrom(s => Decimal.Parse(s.salario_bruto, NumberStyles.Currency, provider)))
             );
             IMapper mapper = mapperConfiguration.CreateMapper();
             services.AddSingleton(mapper);
