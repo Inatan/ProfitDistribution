@@ -17,12 +17,9 @@ namespace ProfitDistribution.Api.Controllers
     [Route("api/v1/[controller]")]
     public class ProfitDistribuitionReportController : ControllerBase
     {
-        //private readonly ILogger<ProfitDistribuitionController> _logger;
-        //ILogger<ProfitDistribuitionController> logger
         private readonly IMapper _mapper;
         private readonly IRepository<Employee> _repo;
         private readonly IParticipationServices _services;
-
 
         public ProfitDistribuitionReportController(IMapper mapper, IRepository<Employee> repo, IParticipationServices services)
         {
@@ -31,24 +28,23 @@ namespace ProfitDistribution.Api.Controllers
             _services = services;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Produces("application/json")]
         [ProducesResponseType(statusCode: 200, Type = typeof(DistributeValueDTO))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 404)]
-        public async Task<IActionResult> RunProfitDistribuition([FromBody] DistributeValueDTO distributeValueDTO)
+        public async Task<IActionResult> DistributeProfit([FromBody] DistributeValueDTO distributeValueDTO)
         {
-            if (ModelState.IsValid)
-            {
-                var dict = await _repo.GetAllAsync();
-                var participations = _services.GenerateParticipations(dict);
-                var provider = new CultureInfo("pt-BR");
-                decimal toDistribution = Decimal.Parse(distributeValueDTO.DistributeValue, NumberStyles.Currency, provider);
-                var report = new ProfitDistributionReport(participations, toDistribution);
-                var reportDTO = _mapper.Map<ProfitDistributionReportDTO>(report);
-                return Ok(reportDTO);
-            }
-            return BadRequest();
+            if (!ModelState.IsValid)
+                return BadRequest();
+            
+            var dict = await _repo.GetAllAsync();
+            var participations = _services.GenerateParticipations(dict);
+            var provider = new CultureInfo("pt-BR");
+            decimal toDistribution = Decimal.Parse(distributeValueDTO.ValorDistribuir, NumberStyles.Currency, provider);
+            var report = new ProfitDistributionReport(participations, toDistribution);
+            var reportDTO = _mapper.Map<ProfitDistributionReportDTO>(report);
+            return Ok(reportDTO);
             
         }
     }

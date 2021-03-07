@@ -1,23 +1,26 @@
-﻿using System;
+﻿using ProfitDistribution.Api.Attributes;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProfitDistribution.Api.DTO
 {
     public class EmployeeDTO
     {
-        [Required]
-        public string matricula { get; set; }
-        [Required]
-        public string nome { get; set; }
-        [Required]
-        public string area { get; set; }
-        [Required]
-        public string cargo { get; set; }
-        [Required]
-        public string salario_bruto { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Matrícula é obrigatória")]
+        public string Matricula { get; set; }
+        [Required(ErrorMessage = "Nome é obrigatório")]
+        public string Nome { get; set; }
+        [Required(ErrorMessage = "Area é obrigatória")]
+        public string Area { get; set; }
+        [Required(ErrorMessage = "Cargo é obrigatório")]
+        public string Cargo { get; set; }
+        [Required(ErrorMessage = "Salário é obrigatório")]
+        [Money(ErrorMessage = "Salário deve estar num formato válido e ser positivo")]
+        public string Salario_Bruto { get; set; }
+        [Required(ErrorMessage = "Data de admissão é obrigatória")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         [DataType(DataType.Date)]
-        public DateTime data_de_admissao { get; set; }
+        [Admission(ErrorMessage = "Data de admissão não pode ser maior que a data atual")]
+        public DateTime Data_de_admissao { get; set; }
     }
 }

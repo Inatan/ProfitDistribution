@@ -27,7 +27,7 @@ namespace ProfitDistribution.Tests.API
                     Nome = "Abraham Jones",
                     Area = "Diretoria",
                     Cargo = "Diretor Tecnologia",
-                    salario_bruto = 18053.25M,
+                    Salario_bruto = 18053.25M,
                     Data_de_admissao = new DateTime(2016, 07, 05)
                 }
             );

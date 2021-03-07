@@ -25,7 +25,7 @@ namespace ProfitDistribution.Tests.Services
                     Nome = "Victor Wilson", 
                     Area = "Diretoria",
                     Cargo = "Diretor Financeiro",
-                    salario_bruto = 12696.20M,
+                    Salario_bruto = 12696.20M,
                     Data_de_admissao = new DateTime(2012, 01, 05)
                 };
             int weight = ActAreaWeight(employee);
@@ -41,7 +41,7 @@ namespace ProfitDistribution.Tests.Services
                     Nome = "Flossie Wilson",
                     Area = "Contabilidade",
                     Cargo = "Auxiliar de Contabilidade",
-                    salario_bruto = 1396.52M,
+                    Salario_bruto = 1396.52M,
                     Data_de_admissao = new DateTime(2015, 01, 05) 
                 };
             int weight = ActAreaWeight(employee);
@@ -58,7 +58,7 @@ namespace ProfitDistribution.Tests.Services
                     Nome = "Dorthy Lee",
                     Area = "Financeiro",
                     Cargo = "Estagiário",
-                    salario_bruto = 1491.45M,
+                    Salario_bruto = 1491.45M,
                     Data_de_admissao = new DateTime(2015, 03, 16)
                 };
             int weight = ActAreaWeight(employee);
@@ -75,7 +75,7 @@ namespace ProfitDistribution.Tests.Services
                     Nome = "Beulah Long",
                     Area = "Tecnologia",
                     Cargo = "Jovem Aprendiz",
-                    salario_bruto = 1019.88M,
+                    Salario_bruto = 1019.88M,
                     Data_de_admissao = new DateTime(2014, 08, 27)
                 };
             int weight = ActAreaWeight(employee);
@@ -92,7 +92,7 @@ namespace ProfitDistribution.Tests.Services
                     Nome = "Daugherty Kramer",
                     Area = "Serviços Gerais",
                     Cargo = "Atendente de Almoxarifado",
-                    salario_bruto = 2120.08M,
+                    Salario_bruto = 2120.08M,
                     Data_de_admissao = new DateTime(2016, 04, 21)
                 };
             int weight = ActAreaWeight(employee);
@@ -109,7 +109,7 @@ namespace ProfitDistribution.Tests.Services
                     Nome = "Taylor Mccarthy",
                     Area = "Relacionamento com o Cliente",
                     Cargo = "Auxiliar de Ouvidoria",
-                    salario_bruto = 1800.16M,
+                    Salario_bruto = 1800.16M,
                     Data_de_admissao = new DateTime(2017, 03, 31)
                 };
             int weight = ActAreaWeight(employee);

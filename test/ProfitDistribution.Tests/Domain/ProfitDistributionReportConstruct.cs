@@ -25,7 +25,7 @@ namespace ProfitDistribution.Tests.Domain
                            Nome = "Abraham Jones", 
                            Area = "Diretoria", 
                            Cargo = "Diretor Tecnologia", 
-                           salario_bruto = 18053.25M, 
+                           Salario_bruto = 18053.25M, 
                            Data_de_admissao = new DateTime(2016, 07, 05) 
                         } 
                     },
@@ -37,7 +37,7 @@ namespace ProfitDistribution.Tests.Domain
                             Nome ="Flossie Wilson",
                             Area ="Contabilidade",
                             Cargo ="Auxiliar de Contabilidade",
-                            salario_bruto = 1396.52M,
+                            Salario_bruto = 1396.52M,
                             Data_de_admissao = new DateTime(2015, 01, 05)
                         }
                     },
@@ -49,7 +49,7 @@ namespace ProfitDistribution.Tests.Domain
                             Nome ="Stephenson Stone",
                             Area ="Financeiro",
                             Cargo ="Analista de Finanças", 
-                            salario_bruto =5694.14M, 
+                            Salario_bruto =5694.14M, 
                             Data_de_admissao = new DateTime(2014, 01, 26) 
                         }
                     }

@@ -101,11 +101,11 @@ namespace ProfitDistribution.Api
                 config =>
                 {
                     config.CreateMap<EmployeeDTO, Employee>()
-                        .ForMember(d => d.salario_bruto,
-                        s => s.MapFrom(s => Decimal.Parse(s.salario_bruto, NumberStyles.Currency, provider)))
+                        .ForMember(d => d.Salario_bruto,
+                        s => s.MapFrom(s => Decimal.Parse(s.Salario_Bruto, NumberStyles.Currency, provider)))
                     .ReverseMap()
-                    .ForMember(d => d.salario_bruto,
-                        s => s.MapFrom(s => s.salario_bruto.ToString("C2", provider)));
+                    .ForMember(d => d.Salario_Bruto,
+                        s => s.MapFrom(s => s.Salario_bruto.ToString("C2", provider)));
 
                     config.CreateMap<Participation, ParticipationDTO>().ForMember(d => d.valor_da_participação,
                         s => s.MapFrom(s => s.Valor_da_participação.ToString("C2", provider)));

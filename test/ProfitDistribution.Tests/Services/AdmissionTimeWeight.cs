@@ -24,7 +24,7 @@ namespace ProfitDistribution.Tests.Services
                 Nome = "Victor Wilson",
                 Cargo = "Diretoria",
                 Area = "Diretor Financeiro",
-                salario_bruto = 12696.20M,
+                Salario_bruto = 12696.20M,
                 Data_de_admissao = new DateTime(2012, 01, 05) 
             };
             int weight = ActAdmissionTimeWeight(employee);
@@ -40,7 +40,7 @@ namespace ProfitDistribution.Tests.Services
                 Nome = "Flossie Wilson",
                 Cargo = "Contabilidade",
                 Area = "Auxiliar de Contabilidade",
-                salario_bruto = 1396.52M,
+                Salario_bruto = 1396.52M,
                 Data_de_admissao = new DateTime(2015,01,05) 
             };
             int weight = ActAdmissionTimeWeight(employee);
@@ -56,7 +56,7 @@ namespace ProfitDistribution.Tests.Services
                 Nome = "Dorthy Lee",
                 Cargo = "Financeiro",
                 Area = "Estagiário",
-                salario_bruto = 1491.45M,
+                Salario_bruto = 1491.45M,
                 Data_de_admissao = new DateTime(2019, 03, 16) 
             };
             int weight = ActAdmissionTimeWeight(employee);
@@ -73,7 +73,7 @@ namespace ProfitDistribution.Tests.Services
                 Nome = "Taylor Mccarthy",
                 Cargo = "Relacionamento com o Cliente",
                 Area = "Auxiliar de Ouvidoria",
-                salario_bruto = 1800.16M,
+                Salario_bruto = 1800.16M,
                 Data_de_admissao = new DateTime(2021, 01, 31)
             };
             int weight = ActAdmissionTimeWeight(employee);

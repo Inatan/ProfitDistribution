@@ -5,6 +5,7 @@ using ProfitDistribution.Api.Model;
 using ProfitDistribution.Domain.Model;
 using ProfitDistribution.Infrastructure;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ProfitDistribution.Api.Controllers
@@ -35,7 +36,8 @@ namespace ProfitDistribution.Api.Controllers
         public async Task<IActionResult> Get()
         {
             var dict = await _repo.GetAllAsync();
-            return Ok(dict);
+            var dictDTO = _mapper.Map<IDictionary<string,EmployeeDTO>>(dict);
+            return Ok(dictDTO);
         }
 
         [HttpGet("{matricula}")]
@@ -66,13 +68,13 @@ namespace ProfitDistribution.Api.Controllers
         {
             var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
 
-            if (ModelState.IsValid)
-            {
-                await _repo.AddAsync(mappedEmployee.Matricula, mappedEmployee);
-                var uri = Url.Action("Get", new { matricula = mappedEmployee.Matricula });
-                return Created(uri, mappedEmployee);
-            }
-            return BadRequest();
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            await _repo.AddAsync(mappedEmployee.Matricula, mappedEmployee);
+            var uri = Url.Action("Get", new { matricula = mappedEmployee.Matricula });
+            return Created(uri, mappedEmployee);
+            
         }
 
         [HttpPut]
@@ -84,13 +86,11 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 404)]
         public async Task<IActionResult> Put([FromBody] EmployeeDTO employeeDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
             var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
-            if (ModelState.IsValid)
-            {
-                await _repo.UpdateAsync(mappedEmployee.Matricula,mappedEmployee);
-                return Ok();
-            }
-            return BadRequest();
+            await _repo.UpdateAsync(mappedEmployee.Matricula, mappedEmployee);
+            return Ok();
         }
 
         [HttpDelete("{matricula}")]

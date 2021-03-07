@@ -25,7 +25,7 @@ namespace ProfitDistribution.Tests.Services
                 Nome ="Dorthy Lee", 
                 Area = "Financeiro", 
                 Cargo ="Estagiário", 
-                salario_bruto = 1491.45M, 
+                Salario_bruto = 1491.45M, 
                 Data_de_admissao = new DateTime(2015, 03, 16)
             };
             int weight = ActWageWeight(employee);
@@ -42,7 +42,7 @@ namespace ProfitDistribution.Tests.Services
                     Nome = "Avila Kane",
                     Area = "Contabilidade",
                     Cargo = "Auxiliar Administrativo",
-                    salario_bruto = 2166.25M,
+                    Salario_bruto = 2166.25M,
                     Data_de_admissao = new DateTime(2016, 09, 16) 
                 };
             int weight = ActWageWeight(employee);
@@ -59,7 +59,7 @@ namespace ProfitDistribution.Tests.Services
                     Nome = "Stephenson Stone", 
                     Area = "Financeiro", 
                     Cargo = "Analista de Finanças", 
-                    salario_bruto = 5694.14M, 
+                    Salario_bruto = 5694.14M, 
                     Data_de_admissao = new DateTime(2015, 03, 16) 
                 };
             int weight = ActWageWeight(employee);
@@ -76,7 +76,7 @@ namespace ProfitDistribution.Tests.Services
                 Nome = "Stephenson Stone",
                 Area = "Financeiro",
                 Cargo = "Analista de Finanças",
-                salario_bruto = 7694.14M,
+                Salario_bruto = 7694.14M,
                 Data_de_admissao = new DateTime(2015, 03, 16)
             };
             int weight = ActWageWeight(employee);
@@ -92,7 +92,7 @@ namespace ProfitDistribution.Tests.Services
                 Nome = "Victor Wilson", 
                 Area = "Diretoria",
                 Cargo = "Diretor Financeiro", 
-                salario_bruto = 12696.20M, 
+                Salario_bruto = 12696.20M, 
                 Data_de_admissao = new DateTime(2012, 01, 05) 
             };
             int weight = ActWageWeight(employee);

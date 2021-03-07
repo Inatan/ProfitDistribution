@@ -27,12 +27,12 @@ namespace ProfitDistribution.Tests.API
             var controlador = new EmployeeController(repo, mapper);
             var model = new EmployeeDTO()
             {
-                matricula = "0014319",
-                nome = "Abraham Jones",
-                area = "Diretoria",
-                cargo = "Diretor Tecnologia",
-                salario_bruto = "R$ 18.053,25",
-                data_de_admissao = new DateTime(2016, 07, 05)
+                Matricula = "0014319",
+                Nome = "Abraham Jones",
+                Area = "Diretoria",
+                Cargo = "Diretor Tecnologia",
+                Salario_Bruto = "R$ 18.053,25",
+                Data_de_admissao = new DateTime(2016, 07, 05)
             };
             var retorno = await controlador.Post(model);
 
