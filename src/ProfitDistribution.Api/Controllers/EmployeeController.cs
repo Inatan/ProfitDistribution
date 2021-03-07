@@ -77,6 +77,24 @@ namespace ProfitDistribution.Api.Controllers
             
         }
 
+        [HttpPost]
+        [SwaggerOperation(Summary = "Registra novo funcionário na base.")]
+        [ProducesResponseType(statusCode: 201, Type = typeof(List<EmployeeDTO>))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
+        [ProducesResponseType(statusCode: 404)]
+        public async Task<IActionResult> Post([FromBody] IList<EmployeeDTO> employeesDTO)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            
+            var mappedEmployees = _mapper.Map<IList<Employee>>(employeesDTO);
+
+            await _services.InsertListAsync(mappedEmployees);
+            var uri = Url.Action("Get");
+            return Created(uri, mappedEmployees);
+
+        }
+
         [HttpPut]
         [SwaggerOperation(
             Summary = "Atualizada dados de funcionário identificado por seu {matricula}."
