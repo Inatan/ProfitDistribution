@@ -5,8 +5,6 @@ using ProfitDistribution.Api.Model;
 using ProfitDistribution.Domain.Model;
 using ProfitDistribution.Infrastructure;
 using Swashbuckle.AspNetCore.Annotations;
-using System;
-using System.Globalization;
 using System.Threading.Tasks;
 
 namespace ProfitDistribution.Api.Controllers
@@ -51,11 +49,12 @@ namespace ProfitDistribution.Api.Controllers
         public async Task<IActionResult> Get(string matricula)
         {
             var employee = await _repo.FindAsync(matricula);
+            var employeeDTO = _mapper.Map<EmployeeDTO>(employee);
             if (employee == null)
             {
                 return NotFound();
             }
-            return Ok(employee);
+            return Ok(employeeDTO);
         }
 
         [HttpPost]

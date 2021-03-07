@@ -35,7 +35,7 @@ namespace ProfitDistribution.Api
             services.AddSingleton(context);
             services.AddTransient<IRepository<Employee>, RepositoryFirebase<Employee>>();
             services.AddTransient<IParticipationServices, ParticipationServices>();
-            AutoMapperSet(ref services);
+            services.AddSingleton(AutoMapperSet());
 
 
             //services.AddApiVersioning(options =>
@@ -66,7 +66,7 @@ namespace ProfitDistribution.Api
             });
         }
 
-        
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -83,7 +83,8 @@ namespace ProfitDistribution.Api
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
             });
 
@@ -93,36 +94,36 @@ namespace ProfitDistribution.Api
             });
         }
 
-        private void AutoMapperSet(ref IServiceCollection services)
+        private IMapper AutoMapperSet()
         {
             var provider = new CultureInfo("pt-BR");
-            MapperConfiguration mapperConfiguration = new MapperConfiguration(config =>
-                config.CreateMap<EmployeeDTO, Employee>()
-                    .ForMember(employee => employee.salario_bruto, 
-                    employeeDTO => employeeDTO.MapFrom(s => Decimal.Parse(s.salario_bruto, NumberStyles.Currency, provider)))
+            MapperConfiguration mapperConfiguration = new MapperConfiguration(
+                config =>
+                {
+                    config.CreateMap<EmployeeDTO, Employee>()
+                        .ForMember(d => d.salario_bruto,
+                        s => s.MapFrom(s => Decimal.Parse(s.salario_bruto, NumberStyles.Currency, provider)))
+                    .ReverseMap()
+                    .ForMember(d => d.salario_bruto,
+                        s => s.MapFrom(s => s.salario_bruto.ToString("C2", provider)));
+
+                    config.CreateMap<Participation, ParticipationDTO>().ForMember(d => d.valor_da_participação,
+                        s => s.MapFrom(s => s.valor_da_participação.ToString("C2", provider)));
+
+                    config.CreateMap<ProfitDistributionReport, ProfitDistributionReportDTO>()
+                        .ForMember(d => d.total_disponibilizado,
+                            s => s.MapFrom(s => s.total_disponibilizado.ToString("C2", provider)))
+                        .ForMember(d => d.total_distribuido,
+                            s => s.MapFrom(s => s.total_distribuido.ToString("C2", provider)))
+                        .ForMember(d => d.saldo_total_disponibilizado,
+                            s => s.MapFrom(s => s.saldo_total_disponibilizado.ToString("C2", provider)))
+                        .ForMember(d => d.total_de_funcionarios,
+                            s => s.MapFrom(s => s.total_de_funcionarios.ToString()));
+                }
+
             );
             IMapper mapper = mapperConfiguration.CreateMapper();
-            services.AddSingleton(mapper);
+            return mapper;
         }
     }
-
-
-    public class DecimalTypeConverter : ITypeConverter<string, decimal>
-    {
-        public decimal Convert(string source, decimal destination, ResolutionContext context)
-        {
-            return Decimal.Parse(source, NumberStyles.Currency, CultureInfo.InvariantCulture);
-        }
-    }
-
-    public class DecimalValueConverter : IValueConverter<string, decimal>
-    {
-        public decimal Convert(string sourceMember, ResolutionContext context)
-        {
-            return 0.00M;
-        }
-    }
-
-
-
 }

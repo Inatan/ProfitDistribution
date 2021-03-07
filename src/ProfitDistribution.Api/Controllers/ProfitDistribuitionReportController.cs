@@ -45,7 +45,8 @@ namespace ProfitDistribution.Api.Controllers
                 var provider = new CultureInfo("pt-BR");
                 decimal toDistribution = Decimal.Parse(distributeValueDTO.DistributeValue, NumberStyles.Currency, provider);
                 var report = new ProfitDistributionReport(participations, toDistribution);
-                return Ok(report);
+                var reportDTO = _mapper.Map<ProfitDistributionReportDTO>(report);
+                return Ok(reportDTO);
             }
             return BadRequest();
             
