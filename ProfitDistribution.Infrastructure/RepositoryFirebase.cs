@@ -1,5 +1,4 @@
 ﻿using FireSharp.Response;
-using ProfitDistribution.Domain.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,37 +14,81 @@ namespace ProfitDistribution.Infrastructure
         }
 
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IDictionary<string, TEntity>> GetAllAsync()
         {
-            FirebaseResponse response = await _context.GetClient().GetAsync($"{typeof(TEntity).Name}");
-            IEnumerable<TEntity> employees = response.ResultAs<IEnumerable<TEntity>>();
+            IDictionary<string, TEntity> employees = null;
+            string path = $"{typeof(TEntity).Name}";
+            try
+            {
+                FirebaseResponse response = await _context.GetClient().GetAsync(path);
+                employees = response.ResultAs<IDictionary<string, TEntity>>();
+            }
+            catch (System.Exception)
+            {
+                FirebaseResponse response = await _context.GetClient().GetAsync(path);
+                employees = response.ResultAs<IDictionary<string, TEntity>>();
+            }
             return employees;
         }
 
-        public async Task AddAsync(string key, params TEntity[] obj)
+        public async Task AddAsync(string key, TEntity obj)
         {
-            SetResponse response = await _context.GetClient().SetAsync($"{obj.GetType().Name}\\{key}", obj);
-            TEntity result = response.ResultAs<TEntity>();
+            string path = $"{obj.GetType().Name}\\{key}";
+            SetResponse response = null;
+            try
+            {
+                response = await _context.GetClient().SetAsync(path, obj);
+            }
+            catch (System.Exception)
+            {
+                response = await _context.GetClient().SetAsync(path, obj);
+            }
         }
 
-        public async Task UpdateAsync(string key,params TEntity[] obj)
+        public async Task UpdateAsync(string key, TEntity obj)
         {
-            Employee employee = obj as Employee;
-            SetResponse response = await _context.GetClient().SetAsync($"{obj.GetType().Name}\\{key}", obj);
-            Employee result = response.ResultAs<Employee>();
+            SetResponse response = null;
+            string path = $"{obj.GetType().Name}\\{key}";
+            try
+            {
+                response = await _context.GetClient().SetAsync(path, obj);
+            }
+            catch (System.Exception)
+            {
+                response = await _context.GetClient().SetAsync(path, obj);
+            }
         }
 
         public async Task<TEntity> FindAsync(string key)
         {
-            FirebaseResponse response = await _context.GetClient().GetAsync($"{typeof(TEntity).Name}\\{key}");
-            TEntity entity = response.ResultAs<TEntity>();
+            FirebaseResponse response = null;
+            TEntity entity = null;
+            string path = $"{typeof(TEntity).Name}\\{key}";
+            try
+            {
+                response = await _context.GetClient().GetAsync(path);
+                entity = response.ResultAs<TEntity>();
+            }
+            catch (System.Exception)
+            {
+                response = await _context.GetClient().GetAsync(path);
+                entity = response.ResultAs<TEntity>();
+            }
             return entity;
         }
 
         public async Task RemoveAsync(string key)
         {
-            FirebaseResponse response = await _context.GetClient().DeleteAsync($"{typeof(TEntity).Name}\\{key}");
-            Employee employee = response.ResultAs<Employee>();
+            FirebaseResponse response = null;
+            string path = $"{typeof(TEntity).Name}\\{key}";
+            try
+            {
+                response = await _context.GetClient().DeleteAsync(path);
+            }
+            catch (System.Exception)
+            {
+                response = await _context.GetClient().DeleteAsync(path);
+            }
         }
     }
 }
