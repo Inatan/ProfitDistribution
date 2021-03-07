@@ -19,36 +19,36 @@ namespace ProfitDistribution.Tests.Services
                         "0014319",
                         new Employee()
                         {
-                           matricula = "0014319",
-                           nome = "Abraham Jones",
-                           area = "Diretoria",
-                           cargo = "Diretor Tecnologia",
+                           Matricula = "0014319",
+                           Nome = "Abraham Jones",
+                           Area = "Diretoria",
+                           Cargo = "Diretor Tecnologia",
                            salario_bruto = 18053.25M,
-                           data_de_admissao = new DateTime(2016, 07, 05)
+                           Data_de_admissao = new DateTime(2016, 07, 05)
                         }
                     },
                     {
                         "0004468",
                         new Employee()
                         {
-                            matricula ="0004468",
-                            nome ="Flossie Wilson",
-                            area ="Contabilidade",
-                            cargo ="Auxiliar de Contabilidade",
+                            Matricula ="0004468",
+                            Nome ="Flossie Wilson",
+                            Area ="Contabilidade",
+                            Cargo ="Auxiliar de Contabilidade",
                             salario_bruto = 1396.52M,
-                            data_de_admissao = new DateTime(2015, 01, 05)
+                            Data_de_admissao = new DateTime(2015, 01, 05)
                         }
                     },
                     {
                         "0002949",
                         new Employee()
                         {
-                            matricula ="0002949",
-                            nome ="Stephenson Stone",
-                            area ="Financeiro",
-                            cargo ="Analista de Finanças",
+                            Matricula ="0002949",
+                            Nome ="Stephenson Stone",
+                            Area ="Financeiro",
+                            Cargo ="Analista de Finanças",
                             salario_bruto =5694.14M,
-                            data_de_admissao = new DateTime(2014, 01, 26)
+                            Data_de_admissao = new DateTime(2014, 01, 26)
                         }
                     }
                 };
@@ -58,7 +58,7 @@ namespace ProfitDistribution.Tests.Services
             ParticipationServices participationServices = new ParticipationServices();
             List<Participation> participations = participationServices.GenerateParticipations(employees).ToList();
             int countResult = participations.Count;
-            decimal sumResult = participations.Sum(p => p.valor_da_participação);
+            decimal sumResult = participations.Sum(p => p.Valor_da_participação);
 
             Assert.Equal(countExpected, countResult);
             Assert.Equal(sumExpected, sumExpected);

@@ -22,12 +22,12 @@ namespace ProfitDistribution.Tests.API
             mock.Setup(r => r.FindAsync(key)).ReturnsAsync(
                 new Employee()
                 { 
-                    matricula = "0014319",
-                    nome = "Abraham Jones", 
-                    area = "Diretoria", 
-                    cargo = "Diretor Tecnologia", 
+                    Matricula = "0014319",
+                    Nome = "Abraham Jones", 
+                    Area = "Diretoria", 
+                    Cargo = "Diretor Tecnologia", 
                     salario_bruto = 18053.25M, 
-                    data_de_admissao = new DateTime(2016, 07, 05)
+                    Data_de_admissao = new DateTime(2016, 07, 05)
                 }
             );
             var repo = mock.Object;

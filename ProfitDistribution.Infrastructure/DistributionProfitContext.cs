@@ -16,7 +16,8 @@ namespace ProfitDistribution.Infrastructure
             };
         }
 
-        public FirebaseClient GetClient() => new FirebaseClient(config);
+        public FirebaseClient GetClient() => 
+            new FirebaseClient(config);
 
     }
 }

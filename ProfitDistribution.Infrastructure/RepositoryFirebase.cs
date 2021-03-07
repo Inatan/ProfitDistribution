@@ -13,21 +13,13 @@ namespace ProfitDistribution.Infrastructure
             _context = context;
         }
 
-
         public async Task<IDictionary<string, TEntity>> GetAllAsync()
         {
             IDictionary<string, TEntity> employees = null;
             string path = $"{typeof(TEntity).Name}";
-            try
-            {
-                FirebaseResponse response = await _context.GetClient().GetAsync(path);
-                employees = response.ResultAs<IDictionary<string, TEntity>>();
-            }
-            catch (System.Exception)
-            {
-                FirebaseResponse response = await _context.GetClient().GetAsync(path);
-                employees = response.ResultAs<IDictionary<string, TEntity>>();
-            }
+            FirebaseResponse response = await _context.GetClient().GetAsync(path);
+            employees = response.ResultAs<IDictionary<string, TEntity>>();
+            
             return employees;
         }
 
@@ -35,28 +27,15 @@ namespace ProfitDistribution.Infrastructure
         {
             string path = $"{obj.GetType().Name}\\{key}";
             SetResponse response = null;
-            try
-            {
-                response = await _context.GetClient().SetAsync(path, obj);
-            }
-            catch (System.Exception)
-            {
-                response = await _context.GetClient().SetAsync(path, obj);
-            }
+            
+            response = await _context.GetClient().SetAsync(path, obj);
         }
 
         public async Task UpdateAsync(string key, TEntity obj)
         {
             SetResponse response = null;
             string path = $"{obj.GetType().Name}\\{key}";
-            try
-            {
-                response = await _context.GetClient().SetAsync(path, obj);
-            }
-            catch (System.Exception)
-            {
-                response = await _context.GetClient().SetAsync(path, obj);
-            }
+            response = await _context.GetClient().SetAsync(path, obj);
         }
 
         public async Task<TEntity> FindAsync(string key)
@@ -64,16 +43,9 @@ namespace ProfitDistribution.Infrastructure
             FirebaseResponse response = null;
             TEntity entity = null;
             string path = $"{typeof(TEntity).Name}\\{key}";
-            try
-            {
-                response = await _context.GetClient().GetAsync(path);
-                entity = response.ResultAs<TEntity>();
-            }
-            catch (System.Exception)
-            {
-                response = await _context.GetClient().GetAsync(path);
-                entity = response.ResultAs<TEntity>();
-            }
+            
+            response = await _context.GetClient().GetAsync(path);
+            entity = response.ResultAs<TEntity>();
             return entity;
         }
 
@@ -81,14 +53,7 @@ namespace ProfitDistribution.Infrastructure
         {
             FirebaseResponse response = null;
             string path = $"{typeof(TEntity).Name}\\{key}";
-            try
-            {
-                response = await _context.GetClient().DeleteAsync(path);
-            }
-            catch (System.Exception)
-            {
-                response = await _context.GetClient().DeleteAsync(path);
-            }
+            response = await _context.GetClient().DeleteAsync(path);
         }
     }
 }

@@ -68,8 +68,8 @@ namespace ProfitDistribution.Api.Controllers
 
             if (ModelState.IsValid)
             {
-                await _repo.AddAsync(mappedEmployee.matricula, mappedEmployee);
-                var uri = Url.Action("Get", new { matricula = mappedEmployee.matricula });
+                await _repo.AddAsync(mappedEmployee.Matricula, mappedEmployee);
+                var uri = Url.Action("Get", new { matricula = mappedEmployee.Matricula });
                 return Created(uri, mappedEmployee);
             }
             return BadRequest();
@@ -87,7 +87,7 @@ namespace ProfitDistribution.Api.Controllers
             var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
             if (ModelState.IsValid)
             {
-                await _repo.UpdateAsync(mappedEmployee.matricula,mappedEmployee);
+                await _repo.UpdateAsync(mappedEmployee.Matricula,mappedEmployee);
                 return Ok();
             }
             return BadRequest();

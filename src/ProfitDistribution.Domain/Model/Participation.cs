@@ -4,28 +4,28 @@
     {
         public Participation(string matricula, string nome, decimal valor_da_participação)
         {
-            this.matricula = matricula;
-            this.nome = nome;
-            this.valor_da_participação = valor_da_participação;
+            this.Matricula = matricula;
+            this.Nome = nome;
+            this.Valor_da_participação = valor_da_participação;
         }
 
         
         public Participation(Employee employee, int timeWeight, int areaWeight, int wageWeight)
         {
-            matricula = employee.matricula;
-            nome = employee.nome;
-            valor_da_participação = Calculate(employee.salario_bruto, timeWeight, areaWeight, wageWeight);
+            Matricula = employee.Matricula;
+            Nome = employee.Nome;
+            Valor_da_participação = Calculate(employee.Salario_bruto, timeWeight, areaWeight, wageWeight);
         }
 
         public Participation() { }
 
-        public string matricula { get; set; }
-        public string nome { get; set; }
-        public decimal valor_da_participação { get; set; }
+        public string Matricula { get; set; }
+        public string Nome { get; set; }
+        public decimal Valor_da_participação { get; set; }
 
-        public decimal Calculate(decimal salario_bruto, int TimeWeight, int AreaWeight, int WageWeight)
+        public decimal Calculate(decimal salario_bruto, int timeWeight, int areaWeight, int wageWeight)
         {
-            return (((salario_bruto * TimeWeight) + (salario_bruto * AreaWeight)) / WageWeight) * 12;
+            return (((salario_bruto * timeWeight) + (salario_bruto * areaWeight)) / wageWeight) * 12;
         }
 
     }

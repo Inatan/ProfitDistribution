@@ -12,14 +12,14 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "ProfitDistribution",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "ProfitDistribution.Api": {
       "commandName": "Project",
-      "launchUrl": "weatherforecast",
+      "launchUrl": "ProfitDistribution",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

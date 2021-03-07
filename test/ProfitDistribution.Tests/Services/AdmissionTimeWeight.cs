@@ -20,12 +20,12 @@ namespace ProfitDistribution.Tests.Services
         {
             Employee employee = new Employee()
             {
-                matricula = "0009968",
-                nome = "Victor Wilson",
-                cargo = "Diretoria",
-                area = "Diretor Financeiro",
+                Matricula = "0009968",
+                Nome = "Victor Wilson",
+                Cargo = "Diretoria",
+                Area = "Diretor Financeiro",
                 salario_bruto = 12696.20M,
-                data_de_admissao = new DateTime(2012, 01, 05) 
+                Data_de_admissao = new DateTime(2012, 01, 05) 
             };
             int weight = ActAdmissionTimeWeight(employee);
             Assert.Equal(5, weight);
@@ -36,12 +36,12 @@ namespace ProfitDistribution.Tests.Services
         {
             Employee employee = new Employee()
             {
-                matricula = "0004468",
-                nome = "Flossie Wilson",
-                cargo = "Contabilidade",
-                area = "Auxiliar de Contabilidade",
+                Matricula = "0004468",
+                Nome = "Flossie Wilson",
+                Cargo = "Contabilidade",
+                Area = "Auxiliar de Contabilidade",
                 salario_bruto = 1396.52M,
-                data_de_admissao = new DateTime(2015,01,05) 
+                Data_de_admissao = new DateTime(2015,01,05) 
             };
             int weight = ActAdmissionTimeWeight(employee);
             Assert.Equal(3, weight);
@@ -52,12 +52,12 @@ namespace ProfitDistribution.Tests.Services
         {
             Employee employee = new Employee() 
             {
-                matricula = "0002105",
-                nome = "Dorthy Lee",
-                cargo = "Financeiro",
-                area = "Estagiário",
+                Matricula = "0002105",
+                Nome = "Dorthy Lee",
+                Cargo = "Financeiro",
+                Area = "Estagiário",
                 salario_bruto = 1491.45M,
-                data_de_admissao = new DateTime(2019, 03, 16) 
+                Data_de_admissao = new DateTime(2019, 03, 16) 
             };
             int weight = ActAdmissionTimeWeight(employee);
             Assert.Equal(2, weight);
@@ -69,12 +69,12 @@ namespace ProfitDistribution.Tests.Services
         {
             Employee employee = new Employee()
             {
-                matricula = "0008601",
-                nome = "Taylor Mccarthy",
-                cargo = "Relacionamento com o Cliente",
-                area = "Auxiliar de Ouvidoria",
+                Matricula = "0008601",
+                Nome = "Taylor Mccarthy",
+                Cargo = "Relacionamento com o Cliente",
+                Area = "Auxiliar de Ouvidoria",
                 salario_bruto = 1800.16M,
-                data_de_admissao = new DateTime(2021, 01, 31)
+                Data_de_admissao = new DateTime(2021, 01, 31)
             };
             int weight = ActAdmissionTimeWeight(employee);
             Assert.Equal(1, weight);

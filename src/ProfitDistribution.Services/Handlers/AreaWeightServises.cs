@@ -7,7 +7,7 @@ namespace ProfitDistribution.Services.Handlers
         public int Categorize(Employee employee)
         {
             int weight = 0;
-            switch (employee.area)
+            switch (employee.Area)
             {
                 case "Diretoria":
                     weight = 1;

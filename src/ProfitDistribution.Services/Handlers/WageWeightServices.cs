@@ -8,7 +8,7 @@ namespace ProfitDistribution.Services.Handlers
         {
             decimal salary = 1100.00M;
             int quantityWage = employee.MeasureQuantityMinimalSalaries(salary);
-            if (employee.cargo == "Estagiário" || quantityWage <= 3)
+            if (employee.Cargo == "Estagiário" || quantityWage <= 3)
                 return 1;
             else if(quantityWage > 3 && quantityWage <= 5)
                 return 2;
