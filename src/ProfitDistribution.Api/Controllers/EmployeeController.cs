@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using ProfitDistribution.Api.DTO;
 using ProfitDistribution.Api.Model;
 using ProfitDistribution.Domain.Model;
 using ProfitDistribution.Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProfitDistribution.Api.Controllers
@@ -18,12 +21,23 @@ namespace ProfitDistribution.Api.Controllers
     {
         private readonly IEmployeeServices _services;
         private readonly IMapper _mapper;
+        private readonly ILogger<EmployeeController> _logger;
 
-
-        public EmployeeController(IEmployeeServices services, IMapper mapper)
+        public EmployeeController(IEmployeeServices services, IMapper mapper, ILogger<EmployeeController> logger)
         {
             _services = services;
             _mapper = mapper;
+            _logger = logger;
+        }
+
+        private void logError()
+        {
+            var errorList = ModelState.ToDictionary(
+                   error => error.Key,
+                   error => error.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                );
+
+            _logger.LogError($"Erro no envio de funcionário: {JsonConvert.SerializeObject(errorList)}");
         }
 
         [HttpGet]
@@ -69,7 +83,10 @@ namespace ProfitDistribution.Api.Controllers
             var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
 
             if (!ModelState.IsValid)
-                return BadRequest();
+            {
+                logError();
+                return BadRequest(ErrorResponse.FromModelState(ModelState));
+            }
 
             await _services.InsertNewAsync(mappedEmployee);
             var uri = Url.Action("Get", new { matricula = mappedEmployee.Matricula });
@@ -85,7 +102,10 @@ namespace ProfitDistribution.Api.Controllers
         public async Task<IActionResult> Post([FromBody] IList<EmployeeDTO> employeesDTO)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+            {
+                logError();
+                return BadRequest(ErrorResponse.FromModelState(ModelState));
+            }
             
             var mappedEmployees = _mapper.Map<IList<Employee>>(employeesDTO);
 
@@ -104,8 +124,11 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 404)]
         public async Task<IActionResult> Put([FromBody] EmployeeDTO employeeDTO)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
+            if (!ModelState.IsValid) 
+            {
+                logError();
+                return BadRequest(ErrorResponse.FromModelState(ModelState));
+            }
             var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
             await _services.UpdateAsync(mappedEmployee);
             return Ok();

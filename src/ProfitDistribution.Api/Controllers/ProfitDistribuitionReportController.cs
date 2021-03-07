@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using ProfitDistribution.Api.DTO;
 using ProfitDistribution.Api.Model;
 using ProfitDistribution.Services;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProfitDistribution.Api.Controllers
@@ -15,11 +18,23 @@ namespace ProfitDistribution.Api.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IReportServices _services;
+        private readonly ILogger<ProfitDistribuitionReportController> _logger;
 
-        public ProfitDistribuitionReportController(IMapper mapper, IReportServices services)
+        public ProfitDistribuitionReportController(IMapper mapper, IReportServices services, ILogger<ProfitDistribuitionReportController> logger)
         {
             _mapper = mapper;
             _services = services;
+            _logger = logger;
+        }
+
+        private void logError()
+        {
+            var errorList = ModelState.ToDictionary(
+                   error => error.Key,
+                   error => error.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                );
+
+            _logger.LogError($"Erro no envio de funcionário: {JsonConvert.SerializeObject(errorList)}");
         }
 
         [HttpPost]
@@ -30,7 +45,10 @@ namespace ProfitDistribution.Api.Controllers
         public async Task<IActionResult> DistributeProfit([FromBody] DistributeValueDTO distributeValueDTO)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+            {
+                logError();
+                return BadRequest(ErrorResponse.FromModelState(ModelState));
+            }
             
             var report = await _services.PresentReport(distributeValueDTO.ValorDistribuir);
             var reportDTO = _mapper.Map<ProfitDistributionReportDTO>(report);
