@@ -34,7 +34,7 @@ namespace ProfitDistribution.Tests.API
                 Nome = "Abraham Jones",
                 Area = "Diretoria",
                 Cargo = "Diretor Tecnologia",
-                Salario_Bruto = "R$ 18.053,25",
+                Salario_bruto = "R$ 18.053,25",
                 Data_de_admissao = new DateTime(2016, 07, 05)
             };
             var ret = await controller.Post(model);
@@ -62,7 +62,7 @@ namespace ProfitDistribution.Tests.API
                 Nome = "Abraham Jones",
                 Area = "Diretoria",
                 Cargo = "Diretor Tecnologia",
-                Salario_Bruto = "R$ 18.053,25",
+                Salario_bruto = "R$ 18.053,25",
                 Data_de_admissao = new DateTime(2016, 07, 05)
             };
             var ret = await controller.Post(model);
@@ -105,7 +105,7 @@ namespace ProfitDistribution.Tests.API
                     Nome = "Abraham Jones",
                     Area = "Diretoria",
                     Cargo = "Diretor Tecnologia",
-                    Salario_Bruto = "R$ 18.053,25",
+                    Salario_bruto = "R$ 18.053,25",
                     Data_de_admissao = new DateTime(2016, 07, 05)
                 },
                 new EmployeeDTO()
@@ -114,7 +114,7 @@ namespace ProfitDistribution.Tests.API
                     Nome = "Abraham Jones",
                     Area = "Diretoria",
                     Cargo = "Diretor Tecnologia",
-                    Salario_Bruto = "R$ 18.053,25",
+                    Salario_bruto = "R$ 18.053,25",
                     Data_de_admissao = new DateTime(2016, 07, 05)
                 },
                 new EmployeeDTO()
@@ -123,7 +123,7 @@ namespace ProfitDistribution.Tests.API
                     Nome = "Abraham Jones",
                     Area = "Diretoria",
                     Cargo = "Diretor Tecnologia",
-                    Salario_Bruto = "R$ 18.053,25",
+                    Salario_bruto = "R$ 18.053,25",
                     Data_de_admissao = new DateTime(2016, 07, 05)
                 },
             };

@@ -6,23 +6,23 @@ namespace ProfitDistribution.Api.DTO
 {
     public class EmployeeDTO
     {
-        [Required(ErrorMessage = "Matrícula é obrigatória")]
+        [Required(ErrorMessage = "matricula é obrigatória")]
         public string Matricula { get; set; }
-        [Required(ErrorMessage = "Nome é obrigatório")]
+        [Required(ErrorMessage = "nome é obrigatório")]
         
         public string Nome { get; set; }
-        [Required(ErrorMessage = "Area é obrigatória")]
-        [Area(ErrorMessage = "Area só pode ser (Diretoria, Contabilidade, Financeiro, Tecnologia, Serviços Gerais e Relacionamento com o Cliente)")]
+        [Required(ErrorMessage = "area é obrigatória")]
+        [Area(ErrorMessage = "area só pode ser (Diretoria, Contabilidade, Financeiro, Tecnologia, Serviços Gerais e Relacionamento com o Cliente)")]
         public string Area { get; set; }
-        [Required(ErrorMessage = "Cargo é obrigatório")]
+        [Required(ErrorMessage = "cargo é obrigatório")]
         public string Cargo { get; set; }
-        [Required(ErrorMessage = "Salário é obrigatório")]
-        [Money(ErrorMessage = "Salário deve estar num formato válido e ser positivo")]
-        public string Salario_Bruto { get; set; }
-        [Required(ErrorMessage = "Data de admissão é obrigatória")]
+        [Required(ErrorMessage = "salario_bruto é obrigatório")]
+        [Money(ErrorMessage = "salario_bruto deve estar em um formato monetário e positivo")]
+        public string Salario_bruto { get; set; }
+        [Required(ErrorMessage = "data_de_admissao é obrigatória")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         [DataType(DataType.Date)]
-        [Admission(ErrorMessage = "Data de admissão não pode ser maior que a data atual")]
+        [Admission(ErrorMessage = "data_de_admissao não pode ser maior que a data atual")]
         public DateTime Data_de_admissao { get; set; }
     }
 }

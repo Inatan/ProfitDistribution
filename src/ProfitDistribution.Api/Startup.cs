@@ -40,8 +40,9 @@ namespace ProfitDistribution.Api
             services.AddSingleton(AutoMapperSet());
             var minimalSalary = Decimal.Parse(Configuration["MinimalSalary"]);
             services.AddSingleton(new SalaryServices(minimalSalary));
-            services.AddSingleton(new SalaryServices(minimalSalary));
-
+            
+            services.AddCors();
+            
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(ErrorResponseFilter));
@@ -52,14 +53,20 @@ namespace ProfitDistribution.Api
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            services.AddCors();
+            
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { 
                     Title = "Distribuição de Lucros Api", 
                     Description = "Api de Distribuição dos lucros responsável recuperar/cadastrar/deletar/atualizar funcionário(Employee), além realizar um relatório de distribuição de lucros(ProfitDistribuitionReport) com base no total o que a empresa pretende disponibilizar para distribuir de lucros",
-                    Version = "1.0" 
+                    Version = "v1",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Inatan L. Hertzog",
+                        Email = "inatan.hertzog@gmail.com",
+                        Url = new Uri("https://www.linkedin.com/in/inatan-hertzog/"),
+                    }
                 });
                 c.EnableAnnotations();
                 c.DocumentFilter<TagDescriptionsDocumentFilter>();
@@ -80,6 +87,12 @@ namespace ProfitDistribution.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(x => x
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .SetIsOriginAllowed(origin => true)
+               .AllowCredentials());
 
             app.UseSwagger();
 
@@ -102,9 +115,9 @@ namespace ProfitDistribution.Api
                 {
                     config.CreateMap<EmployeeDTO, Employee>()
                         .ForMember(d => d.Salario_bruto,
-                        s => s.MapFrom(s => Decimal.Parse(s.Salario_Bruto, NumberStyles.Currency, provider)))
+                        s => s.MapFrom(s => Decimal.Parse(s.Salario_bruto, NumberStyles.Currency, provider)))
                     .ReverseMap()
-                    .ForMember(d => d.Salario_Bruto,
+                    .ForMember(d => d.Salario_bruto,
                         s => s.MapFrom(s => s.Salario_bruto.ToString("C2", provider)));
 
                     config.CreateMap<Participation, ParticipationDTO>().ForMember(d => d.valor_da_participacao,

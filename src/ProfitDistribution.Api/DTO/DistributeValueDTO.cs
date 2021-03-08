@@ -6,8 +6,8 @@ namespace ProfitDistribution.Api.DTO
 {
     public class DistributeValueDTO
     {
-        [Required(ErrorMessage = "Valor a distribuir é obrigatório")]
-        [Money(ErrorMessage = "Salário deve estar num formato válido e ser positivo")]
+        [Required(ErrorMessage = "total_disponibilizado é obrigatório")]
+        [Money(ErrorMessage = "total_disponibilizado deve formato monetário")]
         public string total_disponibilizado { get; set; }
     }
 }
