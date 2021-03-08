@@ -89,7 +89,7 @@ namespace ProfitDistribution.Api.Controllers
             }
 
             await _services.InsertNewAsync(mappedEmployee);
-            var uri = Url.Action("Get", new { matricula = mappedEmployee.Matricula });
+            var uri = Url==null ? "/": Url.Action("Get", new { matricula = mappedEmployee.Matricula });
             return Created(uri, mappedEmployee);
             
         }
@@ -110,7 +110,7 @@ namespace ProfitDistribution.Api.Controllers
             var mappedEmployees = _mapper.Map<IList<Employee>>(employeesDTO);
 
             await _services.InsertListAsync(mappedEmployees);
-            var uri = Url.Action("Get");
+            var uri = Url == null ? "/" : Url.Action("Get");
             return Created(uri, mappedEmployees);
 
         }

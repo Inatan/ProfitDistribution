@@ -20,10 +20,10 @@ namespace ProfitDistribution.Api.Controllers
         private readonly IReportServices _services;
         private readonly ILogger<ProfitDistribuitionReportController> _logger;
 
-        public ProfitDistribuitionReportController(IMapper mapper, IReportServices services, ILogger<ProfitDistribuitionReportController> logger)
+        public ProfitDistribuitionReportController(IReportServices services, IMapper mapper, ILogger<ProfitDistribuitionReportController> logger)
         {
-            _mapper = mapper;
             _services = services;
+            _mapper = mapper;
             _logger = logger;
         }
 
@@ -42,7 +42,7 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 200, Type = typeof(DistributeValueDTO))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 404)]
-        public async Task<IActionResult> DistributeProfit([FromBody] DistributeValueDTO distributeValueDTO)
+        public async Task<IActionResult> DistributeProfitPost([FromBody] DistributeValueDTO distributeValueDTO)
         {
             if (!ModelState.IsValid)
             {

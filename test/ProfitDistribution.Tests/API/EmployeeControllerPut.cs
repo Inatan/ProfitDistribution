@@ -4,8 +4,6 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using ProfitDistribution.Api.Controllers;
 using ProfitDistribution.Api.DTO;
-using ProfitDistribution.Domain.Model;
-using ProfitDistribution.Infrastructure;
 using ProfitDistribution.Services;
 using System;
 using System.Threading.Tasks;
