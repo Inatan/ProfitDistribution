@@ -5,7 +5,6 @@ using Moq;
 using ProfitDistribution.Api.Controllers;
 using ProfitDistribution.Api.DTO;
 using ProfitDistribution.Services;
-using System;
 using System.Threading.Tasks;
 using Xunit;
 
