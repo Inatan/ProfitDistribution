@@ -12,6 +12,7 @@ namespace ProfitDistribution.Api.DTO
         
         public string Nome { get; set; }
         [Required(ErrorMessage = "Area é obrigatória")]
+        [Area(ErrorMessage = "Area só pode ser (Diretoria, Contabilidade, Financeiro, Tecnologia, Serviços Gerais e Relacionamento com o Cliente)")]
         public string Area { get; set; }
         [Required(ErrorMessage = "Cargo é obrigatório")]
         public string Cargo { get; set; }

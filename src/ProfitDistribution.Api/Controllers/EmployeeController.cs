@@ -77,7 +77,8 @@ namespace ProfitDistribution.Api.Controllers
         [SwaggerOperation(Summary = "Registra novo funcionário na base.")]
         [ProducesResponseType(statusCode: 201, Type = typeof(EmployeeDTO))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
-        [ProducesResponseType(statusCode: 404)]
+        [ProducesResponseType(statusCode: 409, Type = typeof(ErrorResponse))]
+        [ProducesResponseType(statusCode: 404, Type = typeof(ErrorResponse))]
         public async Task<IActionResult> Post([FromBody] EmployeeDTO employeeDTO)
         {
             var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
@@ -88,9 +89,18 @@ namespace ProfitDistribution.Api.Controllers
                 return BadRequest(ErrorResponse.FromModelState(ModelState));
             }
 
-            await _services.InsertNewAsync(mappedEmployee);
-            var uri = Url==null ? "/": Url.Action("Get", new { matricula = mappedEmployee.Matricula });
-            return Created(uri, mappedEmployee);
+            bool isSuccess = await _services.InsertNewAsync(mappedEmployee);
+            if(isSuccess)
+            { 
+                var uri = Url==null ? "/": Url.Action("Get", new { matricula = mappedEmployee.Matricula });
+                return Created(uri, mappedEmployee);
+            }
+            else
+            {
+                ModelState.AddModelError("Employee", "Funcionário já possui matrícula cadastrada");
+                logError("Erro no envio de funcionários");
+                return Conflict(ErrorResponse.FromModelState(ModelState));
+            }
             
         }
 
@@ -98,7 +108,8 @@ namespace ProfitDistribution.Api.Controllers
         [SwaggerOperation(Summary = "Registra novos funcionários na base.")]
         [ProducesResponseType(statusCode: 201, Type = typeof(List<EmployeeDTO>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
-        [ProducesResponseType(statusCode: 404)]
+        [ProducesResponseType(statusCode: 409, Type = typeof(ErrorResponse))]
+        [ProducesResponseType(statusCode: 404, Type = typeof(ErrorResponse))]
         [Route("list")]
         public async Task<IActionResult> PostList([FromBody] IList<EmployeeDTO> employeesDTO)
         {
@@ -110,10 +121,18 @@ namespace ProfitDistribution.Api.Controllers
             
             var mappedEmployees = _mapper.Map<IList<Employee>>(employeesDTO);
 
-            await _services.InsertListAsync(mappedEmployees);
-            var uri = Url == null ? "/" : Url.Action("Get");
-            return Created(uri, mappedEmployees);
-
+            bool isSuccess = await _services.InsertListAsync(mappedEmployees);
+            if(isSuccess)
+            {
+                var uri = Url == null ? "/" : Url.Action("Get");
+                return Created(uri, mappedEmployees);
+            }
+            else
+            {
+                ModelState.AddModelError("Employee", "Há Funcionário(s) que já possuem matrícula cadastrada");
+                logError("Erro no envio de funcionários");
+                return Conflict(ErrorResponse.FromModelState(ModelState));
+            }
         }
 
         [HttpPut]

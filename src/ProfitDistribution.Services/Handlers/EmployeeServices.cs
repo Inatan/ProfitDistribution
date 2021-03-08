@@ -1,6 +1,7 @@
 ﻿using ProfitDistribution.Domain.Model;
 using ProfitDistribution.Infrastructure;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProfitDistribution.Services.Handlers
@@ -28,17 +29,28 @@ namespace ProfitDistribution.Services.Handlers
             return await _repo.GetAllAsync();
         }
 
-        public async Task InsertListAsync(IList<Employee> employees)
+        public async Task<bool> InsertListAsync(IList<Employee> employees)
         {
+            var allValues = (await _repo.GetAllAsync()).Select(v => v.Value.Matricula);
+            if (employees.Where(e => allValues.Contains(e.Matricula)).Any())
+            {
+                return false;
+            }
             foreach (var employee in employees)
             {
                 await _repo.AddAsync(employee.Matricula, employee);
             }
+            return true;
         }
         
-        public async Task InsertNewAsync(Employee employee)
+        public async Task<bool> InsertNewAsync(Employee employee)
         {
-            await _repo.AddAsync(employee.Matricula, employee);
+            if(await _repo.FindAsync(employee.Matricula) == null)
+            {
+                await _repo.AddAsync(employee.Matricula, employee);
+                return true;
+            }
+            return false;
         }
 
         public async Task UpdateAsync(Employee employee)
