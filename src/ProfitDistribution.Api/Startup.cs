@@ -66,7 +66,6 @@ namespace ProfitDistribution.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Distirbuição de Lucros Api", Description = "Documentação da API", Version = "1.0" });
                 c.EnableAnnotations();
                 c.DocumentFilter<TagDescriptionsDocumentFilter>();
-
             });
         }
 

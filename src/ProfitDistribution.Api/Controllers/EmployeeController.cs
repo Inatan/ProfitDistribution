@@ -95,11 +95,12 @@ namespace ProfitDistribution.Api.Controllers
         }
 
         [HttpPost]
-        [SwaggerOperation(Summary = "Registra novo funcionário na base.")]
+        [SwaggerOperation(Summary = "Registra novos funcionários na base.")]
         [ProducesResponseType(statusCode: 201, Type = typeof(List<EmployeeDTO>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 404)]
-        public async Task<IActionResult> Post([FromBody] IList<EmployeeDTO> employeesDTO)
+        [Route("list")]
+        public async Task<IActionResult> PostList([FromBody] IList<EmployeeDTO> employeesDTO)
         {
             if (!ModelState.IsValid)
             {
