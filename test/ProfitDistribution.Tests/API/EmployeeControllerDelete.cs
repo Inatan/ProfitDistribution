@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using ProfitDistribution.Api.Controllers;
 using ProfitDistribution.Domain.Model;
-using ProfitDistribution.Infrastructure;
 using ProfitDistribution.Services;
 using System;
 using System.Threading.Tasks;
@@ -37,12 +36,33 @@ namespace ProfitDistribution.Tests.API
             var mapper = mockMapper.Object;
             var logger = mockLogger.Object;
 
-            var controlador = new EmployeeController(services, mapper, logger);
+            var controller = new EmployeeController(services, mapper, logger);
             
-            var retorno = await controlador.Delete(key);
+            var ret = await controller.Delete(key);
 
-            var statusCodeRetornado = (retorno as StatusCodeResult).StatusCode;
-            Assert.Equal(204, statusCodeRetornado);
+            var statusCode = (ret as StatusCodeResult).StatusCode;
+            Assert.Equal(204, statusCode);
         }
+
+        [Fact]
+        public async Task WhenDeleteEmployeeNotExists_ReturnsStatusCode404()
+        {
+            string key = "0014319";
+            var mockMapper = new Mock<IMapper>();
+            var mock = new Mock<IEmployeeServices>();
+            var mockLogger = new Mock<ILogger<EmployeeController>>();
+            mock.Setup(r => r.FindByKeyAsync(key)).Returns(Task.FromResult<Employee>(null));
+            var services = mock.Object;
+            var mapper = mockMapper.Object;
+            var logger = mockLogger.Object;
+
+            var controller = new EmployeeController(services, mapper, logger);
+
+            var ret = await controller.Delete(key);
+
+            var statusCode = (ret as NotFoundResult).StatusCode;
+            Assert.Equal(404, statusCode);
+        }
+
     }
 }

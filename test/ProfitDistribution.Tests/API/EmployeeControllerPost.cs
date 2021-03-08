@@ -25,7 +25,7 @@ namespace ProfitDistribution.Tests.API
             var mapper = mockMapper.Object;
             var logger = mockLogger.Object;
 
-            var controlador = new EmployeeController(services, mapper, logger);
+            var controller = new EmployeeController(services, mapper, logger);
             var model = new EmployeeDTO()
             {
                 Matricula = "0014319",
@@ -35,10 +35,29 @@ namespace ProfitDistribution.Tests.API
                 Salario_Bruto = "R$ 18.053,25",
                 Data_de_admissao = new DateTime(2016, 07, 05)
             };
-            var retorno = await controlador.Post(model);
+            var ret = await controller.Post(model);
 
-            var statusCodeRetornado = (retorno as CreatedResult).StatusCode;
-            Assert.Equal(201, statusCodeRetornado);
+            var statusCode = (ret as CreatedResult).StatusCode;
+            Assert.Equal(201, statusCode);
+        }
+
+        [Fact]
+        public async Task WhenPotIsInvalidFormat_ReturnsStatusCode400()
+        {
+            var mockMapper = new Mock<IMapper>();
+            var mock = new Mock<IEmployeeServices>();
+            var mockLogger = new Mock<ILogger<EmployeeController>>();
+
+            var services = mock.Object;
+            var mapper = mockMapper.Object;
+            var logger = mockLogger.Object;
+
+            var controller = new EmployeeController(services, mapper, logger);
+            controller.ModelState.AddModelError("Matrícula", "Formato inválido");
+            var ret = await controller.Post(null);
+
+            var statusCode = (ret as BadRequestObjectResult).StatusCode;
+            Assert.Equal(400, statusCode);
         }
 
         [Fact]
@@ -52,7 +71,7 @@ namespace ProfitDistribution.Tests.API
             var mapper = mockMapper.Object;
             var logger = mockLogger.Object;
 
-            var controlador = new EmployeeController(services, mapper, logger);
+            var controller = new EmployeeController(services, mapper, logger);
             var model = new List<EmployeeDTO>()
             { 
                 new EmployeeDTO()
@@ -83,10 +102,10 @@ namespace ProfitDistribution.Tests.API
                     Data_de_admissao = new DateTime(2016, 07, 05)
                 },
             };
-            var retorno = await controlador.Post(model);
+            var ret = await controller.PostList(model);
 
-            var statusCodeRetornado = (retorno as CreatedResult).StatusCode;
-            Assert.Equal(201, statusCodeRetornado);
+            var statusCode = (ret as CreatedResult).StatusCode;
+            Assert.Equal(201, statusCode);
         }
     }
 }

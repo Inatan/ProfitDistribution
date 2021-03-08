@@ -32,11 +32,31 @@ namespace ProfitDistribution.Tests.API
             var mapper = mockMapper.Object;
             var logger = mockLogger.Object;
 
-            var controlador = new EmployeeController(services, mapper, logger);
-            var retorno = await controlador.Put(model);
+            var controller = new EmployeeController(services, mapper, logger);
+            var ret = await controller.Put(model);
 
-            var statusCodeRetornado = (retorno as OkResult).StatusCode;
-            Assert.Equal(200, statusCodeRetornado);
+            var statusCode = (ret as OkResult).StatusCode;
+            Assert.Equal(200, statusCode);
         }
+
+        [Fact]
+        public async Task WhenPutIsInvalidFormat_ReturnsStatusCode400()
+        {
+            var mockMapper = new Mock<IMapper>();
+            var mock = new Mock<IEmployeeServices>();
+            var mockLogger = new Mock<ILogger<EmployeeController>>();
+            
+            var services = mock.Object;
+            var mapper = mockMapper.Object;
+            var logger = mockLogger.Object;
+
+            var controller = new EmployeeController(services, mapper, logger);
+            controller.ModelState.AddModelError("Matrícula", "Formato inválido");
+            var ret = await controller.Put(null);
+
+            var statusCode = (ret as BadRequestObjectResult).StatusCode;
+            Assert.Equal(400, statusCode);
+        }
+
     }
 }

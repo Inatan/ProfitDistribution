@@ -6,8 +6,6 @@ using ProfitDistribution.Api.Controllers;
 using ProfitDistribution.Api.DTO;
 using ProfitDistribution.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -26,16 +24,35 @@ namespace ProfitDistribution.Tests.API
             var mapper = mockMapper.Object;
             var logger = mockLogger.Object;
 
-            var controlador = new ProfitDistributionReportController(services, mapper, logger);
+            var controller = new ProfitDistributionReportController(services, mapper, logger);
             var model = new DistributeValueDTO()
             {
                 ValorDistribuir = "R$ 500.000,00"
             };
-            var retorno = await controlador.DistributeProfitPost(model);
+            var ret = await controller.DistributeProfitPost(model);
 
-            var statusCodeRetornado = (retorno as OkObjectResult).StatusCode;
-            Assert.Equal(200, statusCodeRetornado);
+            var statusCode = (ret as OkObjectResult).StatusCode;
+            Assert.Equal(200, statusCode);
         }
+
+        [Fact]
+        public async Task WhenPostIsInvalidFormat_ReturnsStatusCode400()
+        {
+            var mockMapper = new Mock<IMapper>();
+            var mock = new Mock<IReportServices>();
+            var mockLogger = new Mock<ILogger<ProfitDistributionReportController>>();
+            var services = mock.Object;
+            var mapper = mockMapper.Object;
+            var logger = mockLogger.Object;
+
+            var controller = new ProfitDistributionReportController(services, mapper, logger);
+            controller.ModelState.AddModelError("ValorDistribuir", "Formato inválido");
+            var ret = await controller.DistributeProfitPost(null);
+
+            var statusCode = (ret as BadRequestObjectResult).StatusCode;
+            Assert.Equal(400, statusCode);
+        }
+       
 
     }
 }

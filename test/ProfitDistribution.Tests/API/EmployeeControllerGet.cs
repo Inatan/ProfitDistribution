@@ -37,12 +37,32 @@ namespace ProfitDistribution.Tests.API
             var mapper = mockMapper.Object;
             var logger = mockLogger.Object;
 
-            var controlador = new EmployeeController(services, mapper, logger);
+            var controller = new EmployeeController(services, mapper, logger);
 
-            var retorno = await controlador.Get(key);
+            var ret = await controller.Get(key);
 
-            var statusCodeRetornado = (retorno as OkObjectResult).StatusCode;
-            Assert.Equal(200, statusCodeRetornado);
+            var statusCode = (ret as OkObjectResult).StatusCode;
+            Assert.Equal(200, statusCode);
+        }
+
+        [Fact]
+        public async Task WhenGetEmployeeNotExists_ReturnsStatusCode404()
+        {
+            string key = "0014319";
+            var mockMapper = new Mock<IMapper>();
+            var mock = new Mock<IEmployeeServices>();
+            var mockLogger = new Mock<ILogger<EmployeeController>>();
+            mock.Setup(r => r.FindByKeyAsync(key)).Returns(Task.FromResult<Employee>(null));
+            var services = mock.Object;
+            var mapper = mockMapper.Object;
+            var logger = mockLogger.Object;
+
+            var controller = new EmployeeController(services, mapper, logger);
+
+            var ret = await controller.Get(key);
+
+            var statusCode = (ret as NotFoundResult).StatusCode;
+            Assert.Equal(404, statusCode);
         }
 
         [Fact]
@@ -58,11 +78,11 @@ namespace ProfitDistribution.Tests.API
             var logger = mockLogger.Object;
 
 
-            var controlador = new EmployeeController(services, mapper, logger);
-            var retorno = await controlador.Get();
+            var controller = new EmployeeController(services, mapper, logger);
+            var ret = await controller.Get();
 
-            var statusCodeRetornado = (retorno as OkObjectResult).StatusCode;
-            Assert.Equal(200, statusCodeRetornado);
+            var statusCode = (ret as OkObjectResult).StatusCode;
+            Assert.Equal(200, statusCode);
         }
     }
 }

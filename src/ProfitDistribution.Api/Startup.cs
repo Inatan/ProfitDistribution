@@ -40,14 +40,7 @@ namespace ProfitDistribution.Api
             services.AddSingleton(AutoMapperSet());
             var minimalSalary = Decimal.Parse(Configuration["MinimalSalary"]);
             services.AddSingleton(new SalaryServices(minimalSalary));
-
-
-            //services.AddApiVersioning(options =>
-            //    options.ApiVersionReader = ApiVersionReader.Combine(
-            //        new HeaderApiVersionReader("api-version"),
-            //        new QueryStringApiVersionReader("api-version")
-            //    )
-            //);
+            services.AddSingleton(new SalaryServices(minimalSalary));
 
             services.AddMvc(options =>
             {
