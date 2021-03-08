@@ -36,5 +36,6 @@ namespace ProfitDistribution.Tests.API
             var statusCodeRetornado = (retorno as OkObjectResult).StatusCode;
             Assert.Equal(200, statusCodeRetornado);
         }
+
     }
 }
