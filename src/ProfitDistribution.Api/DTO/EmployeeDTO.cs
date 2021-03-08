@@ -17,7 +17,7 @@ namespace ProfitDistribution.Api.DTO
         [Required(ErrorMessage = "cargo é obrigatório")]
         public string Cargo { get; set; }
         [Required(ErrorMessage = "salario_bruto é obrigatório")]
-        [Money(ErrorMessage = "salario_bruto deve estar em um formato monetário e positivo")]
+        [Money(ErrorMessage = "salario_bruto deve estar em um formato monetário (R$ XX,XX) e positivo")]
         public string Salario_bruto { get; set; }
         [Required(ErrorMessage = "data_de_admissao é obrigatória")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
