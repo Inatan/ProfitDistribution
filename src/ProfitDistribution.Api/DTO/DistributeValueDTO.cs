@@ -1,4 +1,5 @@
-﻿using ProfitDistribution.Api.Attributes;
+﻿using Newtonsoft.Json;
+using ProfitDistribution.Api.Attributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProfitDistribution.Api.DTO
