@@ -14,13 +14,13 @@ namespace ProfitDistribution.Api.Controllers
     [ApiVersion("1.0")]
     [ApiExplorerSettings(GroupName = "v1")]
     [Route("api/v1/[controller]")]
-    public class ProfitDistribuitionReportController : ControllerBase
+    public class ProfitDistributionReportController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IReportServices _services;
-        private readonly ILogger<ProfitDistribuitionReportController> _logger;
+        private readonly ILogger<ProfitDistributionReportController> _logger;
 
-        public ProfitDistribuitionReportController(IReportServices services, IMapper mapper, ILogger<ProfitDistribuitionReportController> logger)
+        public ProfitDistributionReportController(IReportServices services, IMapper mapper, ILogger<ProfitDistributionReportController> logger)
         {
             _services = services;
             _mapper = mapper;

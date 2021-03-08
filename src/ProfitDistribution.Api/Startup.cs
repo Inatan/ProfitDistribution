@@ -31,7 +31,7 @@ namespace ProfitDistribution.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            DistributionProfitContext context = new DistributionProfitContext(Configuration["FirebaseConection:AuthSecret"], Configuration["FirebaseConection:BasePath"]);
+            ProfitDistributionContext context = new ProfitDistributionContext(Configuration["FirebaseConection:AuthSecret"], Configuration["FirebaseConection:BasePath"]);
             services.AddSingleton(context);
             services.AddTransient<IRepository<Employee>, RepositoryFirebase<Employee>>();
             services.AddTransient<IParticipationServices, ParticipationServices>();
@@ -63,7 +63,11 @@ namespace ProfitDistribution.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Distirbuição de Lucros Api", Description = "Documentação da API", Version = "1.0" });
+                c.SwaggerDoc("v1", new OpenApiInfo { 
+                    Title = "Distribuição de Lucros Api", 
+                    Description = "Api de Distribuição dos lucros responsável recuperar/cadastrar/deletar/atualizar funcionário(Employee), além realizar um relatório de distribuição de lucros(ProfitDistribuitionReport) com base no total o que a empresa pretende disponibilizar para distribuir de lucros",
+                    Version = "1.0" 
+                });
                 c.EnableAnnotations();
                 c.DocumentFilter<TagDescriptionsDocumentFilter>();
             });

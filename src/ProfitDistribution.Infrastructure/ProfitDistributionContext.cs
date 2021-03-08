@@ -4,10 +4,10 @@ using FireSharp.Interfaces;
 
 namespace ProfitDistribution.Infrastructure
 {
-    public class DistributionProfitContext
+    public class ProfitDistributionContext
     {
         private IFirebaseConfig config;
-        public DistributionProfitContext(string authSecret, string basePath)
+        public ProfitDistributionContext(string authSecret, string basePath)
         {
             config = new FirebaseConfig
             {

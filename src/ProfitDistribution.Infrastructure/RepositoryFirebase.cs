@@ -6,9 +6,9 @@ namespace ProfitDistribution.Infrastructure
 {
     public class RepositoryFirebase<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly DistributionProfitContext _context;
+        private readonly ProfitDistributionContext _context;
 
-        public RepositoryFirebase(DistributionProfitContext context)
+        public RepositoryFirebase(ProfitDistributionContext context)
         {
             _context = context;
         }

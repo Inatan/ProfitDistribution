@@ -20,13 +20,13 @@ namespace ProfitDistribution.Tests.API
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IReportServices>();
-            var mockLogger = new Mock<ILogger<ProfitDistribuitionReportController>>();
+            var mockLogger = new Mock<ILogger<ProfitDistributionReportController>>();
 
             var services = mock.Object;
             var mapper = mockMapper.Object;
             var logger = mockLogger.Object;
 
-            var controlador = new ProfitDistribuitionReportController(services, mapper, logger);
+            var controlador = new ProfitDistributionReportController(services, mapper, logger);
             var model = new DistributeValueDTO()
             {
                 ValorDistribuir = "R$ 500.000,00"

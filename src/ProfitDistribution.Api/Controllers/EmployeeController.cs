@@ -15,7 +15,7 @@ namespace ProfitDistribution.Api.Controllers
 {
     [ApiController]
     [ApiVersion("1.0")]
-    //[ApiExplorerSettings(GroupName = "v1")]
+    [ApiExplorerSettings(GroupName = "v1")]
     [Route("api/v1/[controller]")]
     public class EmployeeController : ControllerBase
     {
@@ -56,7 +56,7 @@ namespace ProfitDistribution.Api.Controllers
 
         [HttpGet("{matricula}")]
         [SwaggerOperation(
-            Summary = "Recupera o funcionário identificado por seu {matricula}."
+            Summary = "Recupera o funcionário identificado por sua {matricula}."
         )]
         [Produces("application/json")]
         [ProducesResponseType(statusCode: 200, Type = typeof(EmployeeDTO))]
@@ -137,7 +137,7 @@ namespace ProfitDistribution.Api.Controllers
 
         [HttpDelete("{matricula}")]
         [SwaggerOperation(
-            Summary = "Deleta funcionário identificado por seu {matricula}."
+            Summary = "Deleta funcionário identificado por sua {matricula}."
         )]
         [ProducesResponseType(statusCode: 204)]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
