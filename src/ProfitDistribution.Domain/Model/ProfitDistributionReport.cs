@@ -17,7 +17,7 @@ namespace ProfitDistribution.Domain.Model
             this.Participacoes = participacoes;
             this.Total_disponibilizado = total_disponibilizado;
             this.Total_de_funcionarios = participacoes.Count();
-            this.Total_distribuido = participacoes.Sum(p => p.Valor_da_participação);
+            this.Total_distribuido = participacoes.Sum(p => p.Valor_da_participacao);
             this.Saldo_total_disponibilizado = this.Total_disponibilizado - this.Total_distribuido;
         }
     }

@@ -21,9 +21,9 @@
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ProfitDistribution.Infrastructure\ProfitDistribution.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\ProfitDistribution.Api\ProfitDistribution.Api.csproj" />
     <ProjectReference Include="..\..\src\ProfitDistribution.Domain\ProfitDistribution.Domain.csproj" />
+    <ProjectReference Include="..\..\src\ProfitDistribution.Infrastructure\ProfitDistribution.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\ProfitDistribution.Services\ProfitDistribution.Services.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$(VisualStudioVersion) == '16.0'">

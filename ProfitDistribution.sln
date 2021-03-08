@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{354D4DD9-B15
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F8C0735A-ECCE-4290-97F4-2800E8FB0DF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfitDistribution.Infrastructure", "ProfitDistribution.Infrastructure\ProfitDistribution.Infrastructure.csproj", "{D2BFBF08-1EC1-429D-84EE-EC5A80387A79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfitDistribution.Infrastructure", "src\ProfitDistribution.Infrastructure\ProfitDistribution.Infrastructure.csproj", "{D2BFBF08-1EC1-429D-84EE-EC5A80387A79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

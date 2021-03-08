@@ -111,8 +111,8 @@ namespace ProfitDistribution.Api
                     .ForMember(d => d.Salario_Bruto,
                         s => s.MapFrom(s => s.Salario_bruto.ToString("C2", provider)));
 
-                    config.CreateMap<Participation, ParticipationDTO>().ForMember(d => d.valor_da_participação,
-                        s => s.MapFrom(s => s.Valor_da_participação.ToString("C2", provider)));
+                    config.CreateMap<Participation, ParticipationDTO>().ForMember(d => d.valor_da_participacao,
+                        s => s.MapFrom(s => s.Valor_da_participacao.ToString("C2", provider)));
 
                     config.CreateMap<ProfitDistributionReport, ProfitDistributionReportDTO>()
                         .ForMember(d => d.total_disponibilizado,
