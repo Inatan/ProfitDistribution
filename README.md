@@ -16,7 +16,17 @@ Api de Distribuição de lucros é responsável
 - Infrastructure: Library layer of data persistence to firebase
 - Tests: Test project using Moq and xunit to test all solution
 
-## Como rodar
+
+
+# Como rodar
+## Requisitos para rodar
+- Para Rodar é necessário: 
+	- [.Net Core Runtime 3.1](https://dotnet.microsoft.com/download)
+	- [AspnetCore Runtime 3.1](https://dotnet.microsoft.com/download)
+	
+
+	
+	
 - Na raiz do projeto rodar o comando:
 ```
 dotnet run --configuration Release --project src\ProfitDistribution.Api\ProfitDistribution.Api.csproj
@@ -27,7 +37,7 @@ dotnet test test\ProfitDistribution.Test\ProfitDistribution.Test.csproj
 ```
 
 ## Frameworks e Tecnologias
- - [.NET  Core 3.1](https://docs.microsoft.com/pt-br/dotnet/core/introduction)
+ - [.NET  Core 3.1](https://dotnet.microsoft.com/download)
  - [Visual Studio](https://visualstudio.microsoft.com/pt-br/)
  - [Firebase](https://firebase.google.com/products/realtime-database)
  - [Swagger](https://swagger.io/)
