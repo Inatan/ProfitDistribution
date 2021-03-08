@@ -1,5 +1,5 @@
 # ProfitDistribution
-Api de Distribuição de lucros é responsável 
+Api de Distribuição de lucros que é responsável por:
 - Recuperar/cadastrar/deletar/atualizar funcionário(Employee);
 - Realizar um relatório de distribuição de lucros(ProfitDistribuitionReport) com base no total o que a empresa pretende disponibilizar para distribuir de lucros.
 
