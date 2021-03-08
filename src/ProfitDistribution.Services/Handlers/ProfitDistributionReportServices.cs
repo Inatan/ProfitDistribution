@@ -18,7 +18,7 @@ namespace ProfitDistribution.Services.Handlers
 
         public async Task<object> PresentReport(string value)
         {
-            decimal toDistribution = Decimal.Parse(value, NumberStyles.Currency, new CultureInfo("pt-BR"));
+            decimal toDistribution = Decimal.Parse(value, NumberStyles.Currency);
             var dict = await _repo.GetAllAsync();
             var participations = _services.GenerateParticipations(dict);
             var report = new ProfitDistributionReport(participations, toDistribution);

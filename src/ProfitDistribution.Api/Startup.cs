@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
@@ -40,7 +41,9 @@ namespace ProfitDistribution.Api
             services.AddSingleton(AutoMapperSet());
             var minimalSalary = Decimal.Parse(Configuration["MinimalSalary"]);
             services.AddSingleton(new SalaryServices(minimalSalary));
+
             
+
             services.AddCors();
             
             services.AddMvc(options =>
@@ -82,6 +85,13 @@ namespace ProfitDistribution.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            var supportedCultures = new[] { new CultureInfo("pt-BR") };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(culture: "pt-BR", uiCulture: "pt-BR"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -109,27 +119,26 @@ namespace ProfitDistribution.Api
 
         private IMapper AutoMapperSet()
         {
-            var provider = new CultureInfo("pt-BR");
             MapperConfiguration mapperConfiguration = new MapperConfiguration(
                 config =>
                 {
                     config.CreateMap<EmployeeDTO, Employee>()
                         .ForMember(d => d.Salario_bruto,
-                        s => s.MapFrom(s => Decimal.Parse(s.Salario_bruto, NumberStyles.Currency, provider)))
+                        s => s.MapFrom(s => Decimal.Parse(s.Salario_bruto, NumberStyles.Currency)))
                     .ReverseMap()
                     .ForMember(d => d.Salario_bruto,
-                        s => s.MapFrom(s => s.Salario_bruto.ToString("C2", provider)));
+                        s => s.MapFrom(s => s.Salario_bruto.ToString("C2")));
 
                     config.CreateMap<Participation, ParticipationDTO>().ForMember(d => d.valor_da_participacao,
-                        s => s.MapFrom(s => s.Valor_da_participacao.ToString("C2", provider)));
+                        s => s.MapFrom(s => s.Valor_da_participacao.ToString("C2")));
 
                     config.CreateMap<ProfitDistributionReport, ProfitDistributionReportDTO>()
                         .ForMember(d => d.total_disponibilizado,
-                            s => s.MapFrom(s => s.Total_disponibilizado.ToString("C2", provider)))
+                            s => s.MapFrom(s => s.Total_disponibilizado.ToString("C2")))
                         .ForMember(d => d.total_distribuido,
-                            s => s.MapFrom(s => s.Total_distribuido.ToString("C2", provider)))
+                            s => s.MapFrom(s => s.Total_distribuido.ToString("C2")))
                         .ForMember(d => d.saldo_total_disponibilizado,
-                            s => s.MapFrom(s => s.Saldo_total_disponibilizado.ToString("C2", provider)))
+                            s => s.MapFrom(s => s.Saldo_total_disponibilizado.ToString("C2")))
                         .ForMember(d => d.total_de_funcionarios,
                             s => s.MapFrom(s => s.Total_de_funcionarios.ToString()));
                 }

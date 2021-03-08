@@ -11,7 +11,7 @@ namespace ProfitDistribution.Api.Attributes
             string money = value as string;
             try
             {
-                var currency = Decimal.Parse(money, NumberStyles.Currency, new CultureInfo("pt-BR"));
+                var currency = Decimal.Parse(money, NumberStyles.Currency);
                 return currency > 0;
             }
             catch (Exception)
