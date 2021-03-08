@@ -55,7 +55,7 @@ namespace ProfitDistribution.Tests.Services
             int countExpected = 3;
             decimal sumExpected = 427926.60M;
 
-            ParticipationServices participationServices = new ParticipationServices();
+            ParticipationServices participationServices = new ParticipationServices(new SalaryServices(1100.00M));
             List<Participation> participations = participationServices.GenerateParticipations(employees).ToList();
             int countResult = participations.Count;
             decimal sumResult = participations.Sum(p => p.Valor_da_participação);

@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using ProfitDistribution.Api.Controllers;
 using ProfitDistribution.Api.DTO;
 using ProfitDistribution.Domain.Model;
 using ProfitDistribution.Infrastructure;
+using ProfitDistribution.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,12 +21,14 @@ namespace ProfitDistribution.Tests.API
         public async Task WhenPostNewEmployee_ReturnsStatusCode201()
         {
             var mockMapper = new Mock<IMapper>();
-            var mock = new Mock<IRepository<Employee>>();
-            
-            var repo = mock.Object;
-            var mapper = mockMapper.Object;
+            var mock = new Mock<IEmployeeServices>();
+            var mockLogger = new Mock<ILogger<EmployeeController>>();
 
-            var controlador = new EmployeeController(repo, mapper);
+            var services = mock.Object;
+            var mapper = mockMapper.Object;
+            var logger = mockLogger.Object;
+
+            var controlador = new EmployeeController(services, mapper, logger);
             var model = new EmployeeDTO()
             {
                 Matricula = "0014319",

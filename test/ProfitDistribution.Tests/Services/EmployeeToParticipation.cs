@@ -20,7 +20,7 @@ namespace ProfitDistribution.Tests.Services
                     Salario_bruto = 18053.25M,
                     Data_de_admissao = new DateTime(2016, 07, 05)
                 };
-            ParticipationServices participationServices = new ParticipationServices();
+            ParticipationServices participationServices = new ParticipationServices(new SalaryServices(1100.00M));
             Participation participationResult = participationServices.EmployeeToParticipation(employee);
             Participation participationExpected = new Participation("0014319", "Abraham Jones", 173311.20M);
             Assert.Equal(participationExpected.Valor_da_participação,participationResult.Valor_da_participação);

@@ -57,7 +57,7 @@ namespace ProfitDistribution.Tests.Domain
             decimal sumExpected = 427926.60M;
             decimal countExpeted = 3;
 
-            ParticipationServices participationServices = new ParticipationServices();
+            ParticipationServices participationServices = new ParticipationServices(new SalaryServices(1100.00M));
             List<Participation> participations = participationServices.GenerateParticipations(employees).ToList();
             ProfitDistributionReport report = new ProfitDistributionReport(participations,valueToDistribution);
 

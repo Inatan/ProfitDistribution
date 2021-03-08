@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using ProfitDistribution.Api.Controllers;
 using ProfitDistribution.Domain.Model;
 using ProfitDistribution.Infrastructure;
+using ProfitDistribution.Services;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -17,9 +19,10 @@ namespace ProfitDistribution.Tests.API
         {
             string key = "0014319";
             var mockMapper = new Mock<IMapper>();
-            var mock = new Mock<IRepository<Employee>>();
+            var mockLogger = new Mock<ILogger<EmployeeController>>();
+            var mock = new Mock<IEmployeeServices>();
             
-            mock.Setup(r => r.FindAsync(key)).ReturnsAsync(
+            mock.Setup(r => r.FindByKeyAsync(key)).ReturnsAsync(
                 new Employee()
                 { 
                     Matricula = "0014319",
@@ -30,10 +33,11 @@ namespace ProfitDistribution.Tests.API
                     Data_de_admissao = new DateTime(2016, 07, 05)
                 }
             );
-            var repo = mock.Object;
+            var services = mock.Object;
             var mapper = mockMapper.Object;
+            var logger = mockLogger.Object;
 
-            var controlador = new EmployeeController(repo, mapper);
+            var controlador = new EmployeeController(services, mapper, logger);
             
             var retorno = await controlador.Delete(key);
 
