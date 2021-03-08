@@ -9,6 +9,7 @@ namespace ProfitDistribution.Api.DTO
         [Required(ErrorMessage = "Matrícula é obrigatória")]
         public string Matricula { get; set; }
         [Required(ErrorMessage = "Nome é obrigatório")]
+        
         public string Nome { get; set; }
         [Required(ErrorMessage = "Area é obrigatória")]
         public string Area { get; set; }

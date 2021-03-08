@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using ProfitDistribution.Api.Controllers;
 using ProfitDistribution.Api.DTO;
@@ -18,6 +19,7 @@ namespace ProfitDistribution.Tests.API
         {
             string key = "0014319";
             var mockMapper = new Mock<IMapper>();
+            var mockLogger = new Mock<ILogger<EmployeeController>>();
             var mock = new Mock<IRepository<Employee>>();
             
             mock.Setup(r => r.FindAsync(key)).ReturnsAsync(
@@ -33,8 +35,9 @@ namespace ProfitDistribution.Tests.API
             );
             var repo = mock.Object;
             var mapper = mockMapper.Object;
+            var logger = mockLogger.Object;
 
-            var controlador = new EmployeeController(repo, mapper);
+            var controlador = new EmployeeController(repo, mapper, logger);
             var retorno = await controlador.Get(key);
 
             var statusCodeRetornado = (retorno as OkObjectResult).StatusCode;

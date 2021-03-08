@@ -36,10 +36,10 @@ namespace ProfitDistribution.Api
             services.AddTransient<IRepository<Employee>, RepositoryFirebase<Employee>>();
             services.AddTransient<IParticipationServices, ParticipationServices>();
             services.AddTransient<IReportServices, ProfitDistributionReportServices>(); 
-            services.AddTransient<IEmployeeServices, EmployeeServices>(); 
-
-
+            services.AddTransient<IEmployeeServices, EmployeeServices>();
             services.AddSingleton(AutoMapperSet());
+            var minimalSalary = Decimal.Parse(Configuration["MinimalSalary"]);
+            services.AddSingleton(new SalaryServices(minimalSalary));
 
 
             //services.AddApiVersioning(options =>

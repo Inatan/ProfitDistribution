@@ -1,10 +1,11 @@
 ﻿using ProfitDistribution.Domain.Model;
+using System;
 
 namespace ProfitDistribution.Services.Handlers
 {
     public class AreaWeightServises : IWeightServices
     {
-        public int Categorize(Employee employee)
+        public int Categorize(Employee employee,decimal salary = 0)
         {
             int weight = 0;
             switch (employee.Area)
@@ -25,8 +26,7 @@ namespace ProfitDistribution.Services.Handlers
                     break;
 
                 default:
-                    weight = 0;
-                    break;
+                    throw new Exception("Area não categorizada");
             }
             return weight;
         }

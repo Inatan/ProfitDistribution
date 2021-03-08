@@ -4,7 +4,7 @@ namespace ProfitDistribution.Services.Handlers
 {
     public class AdmissionTimeWeightServices : IWeightServices
     {
-        public int Categorize(Employee employee)
+        public int Categorize(Employee employee,decimal salary = 0)
         {
             int admissionYear = employee.AdmissionYear();
             if (admissionYear <= 1)
@@ -13,9 +13,7 @@ namespace ProfitDistribution.Services.Handlers
                 return 2;
             else if (admissionYear > 3 && admissionYear <= 8)
                 return 3;
-            else if (admissionYear > 8)
-                return 5;
-            return 0;
+            return 5;
         }
     }
 }
