@@ -1,4 +1,4 @@
-# ProfitDistribution
+# ProfitDistribution - Desafio Stone
 Api de Distribuição de lucros que é responsável por:
 - Recuperar/cadastrar/deletar/atualizar funcionário(Employee);
 - Realizar um relatório de distribuição de lucros(ProfitDistribuitionReport) com base no total o que a empresa pretende disponibilizar para distribuir de lucros.
@@ -37,6 +37,15 @@ dotnet publish -c Release  -o ./publish src/ProfitDistribution.Api/ProfitDistrib
 - Rodar testes:
 ```
 dotnet test test\ProfitDistribution.Test\ProfitDistribution.Test.csproj
+```
+
+- Criar imagem no docker
+```
+docker build --rm -f "Dockerfile" -t profit-distribution .
+```
+- Rodar container na porta 5000
+```
+docker run -d -p 5000:80 profit-distribution
 ```
 
 ## Frameworks e Tecnologias
