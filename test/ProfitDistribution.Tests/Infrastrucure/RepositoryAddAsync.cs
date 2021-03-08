@@ -18,8 +18,8 @@ namespace ProfitDistribution.Tests.Infrastrucure
             repo.AddAsync(key, obj);
 
             //assert
-            var tarefa = repo.FindAsync(key);
-            Assert.NotNull(tarefa);
+            var ret = repo.FindAsync(key);
+            Assert.NotNull(ret);
         }
     }
 }

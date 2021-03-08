@@ -27,7 +27,7 @@ namespace ProfitDistribution.Tests.API
             var controller = new ProfitDistributionReportController(services, mapper, logger);
             var model = new DistributeValueDTO()
             {
-                ValorDistribuir = "R$ 500.000,00"
+                total_disponibilizado = "R$ 500.000,00"
             };
             var ret = await controller.DistributeProfitPost(model);
 
