@@ -6,7 +6,7 @@ Api de Distribuição de lucros que é responsável por:
 ## Persistência de dados
 - Escolha foi Firebase como base de dados;
 - Configurações de conexão no appsettings.json;
-- Identificador de Employee é o código da matricula;
+- Identificador de Employee é o código da matricula.
 
 ## Arquitetura
 - API: Camada de aplicação onde é feita a comunicação com a API RestFul;
@@ -27,7 +27,7 @@ Api de Distribuição de lucros que é responsável por:
 ```
 dotnet run --project src\ProfitDistribution.Api\ProfitDistribution.Api.csproj
 ```
-- Ao iniciar a aplicação as abrir (http://localhost:5000/swagger/index.html) para ver a documentação da API
+- Ao iniciar a aplicação as abrir (http://localhost:5000/swagger/index.html) para ver a documentação da API.
 
 - Para publicar API:
 ```
