@@ -1,22 +1,19 @@
 # ProfitDistribution
 Api de Distribuição de lucros é responsável 
-- recuperar/cadastrar/deletar/atualizar funcionário(Employee)
-- realizar um relatório de distribuição de lucros(ProfitDistribuitionReport) com base no total o que a empresa pretende disponibilizar para distribuir de lucros
+- Recuperar/cadastrar/deletar/atualizar funcionário(Employee)
+- Realizar um relatório de distribuição de lucros(ProfitDistribuitionReport) com base no total o que a empresa pretende disponibilizar para distribuir de lucros
 
 ## Persistência de dados
-- Escolha foi Firebase como base de dados
-- Configurações de conexão no appsettings.json
-- Firebase livre para testes até dias  05/04/2021
-- Identificador de Employee é o código da matricula
+- Escolha foi Firebase como base de dados;
+- Configurações de conexão no appsettings.json;
+- Identificador de Employee é o código da matricula;
 
-## Implementation structure
-- API: Aplication developed using .NET  Core 3.1
-- Services: Library layer that contains all business rules
-- Domain: Library contains reusable classes in all application
-- Infrastructure: Library layer of data persistence to firebase
-- Tests: Test project using Moq and xunit to test all solution
-
-
+## Arquitetura
+- API: Camada de aplicação onde é feita a comunicação com a API RestFul;
+- Services: Camada responsável pelas regras de negócio da aplicação;
+- Domain: Camada responsável pelas classes estruturas que definem o negócio;
+- Infrastructure: Cammada de persistência de dados utilizando Firesharp (Firebase);
+- Tests: Camada de teste onde são feitos os testes unitários utilizando moq e xunit;
 
 # Como rodar
 ## Requisitos para rodar
@@ -24,13 +21,19 @@ Api de Distribuição de lucros é responsável
 	- [.Net Core Runtime 3.1](https://dotnet.microsoft.com/download)
 	- [AspnetCore Runtime 3.1](https://dotnet.microsoft.com/download)
 	
+	
+	
+- Na raiz da solution o comando:
+```
+dotnet run --project src\ProfitDistribution.Api\ProfitDistribution.Api.csproj
+```
+- Ao iniciar a aplicação as abrir (http://localhost:5000/swagger/index.html) para ver a documentação da API
 
-	
-	
-- Na raiz do projeto rodar o comando:
+- Para publicar API:
 ```
-dotnet run --configuration Release --project src\ProfitDistribution.Api\ProfitDistribution.Api.csproj
+dotnet publish -c Release  -o ./publish src/ProfitDistribution.Api/ProfitDistribution.Api.csproj
 ```
+
 - Rodar testes:
 ```
 dotnet test test\ProfitDistribution.Test\ProfitDistribution.Test.csproj
