@@ -1,7 +1,7 @@
 # ProfitDistribution
 Api de Distribuição de lucros é responsável 
-- Recuperar/cadastrar/deletar/atualizar funcionário(Employee)
-- Realizar um relatório de distribuição de lucros(ProfitDistribuitionReport) com base no total o que a empresa pretende disponibilizar para distribuir de lucros
+- Recuperar/cadastrar/deletar/atualizar funcionário(Employee);
+- Realizar um relatório de distribuição de lucros(ProfitDistribuitionReport) com base no total o que a empresa pretende disponibilizar para distribuir de lucros.
 
 ## Persistência de dados
 - Escolha foi Firebase como base de dados;
@@ -13,13 +13,13 @@ Api de Distribuição de lucros é responsável
 - Services: Camada responsável pelas regras de negócio da aplicação;
 - Domain: Camada responsável pelas classes estruturas que definem o negócio;
 - Infrastructure: Cammada de persistência de dados utilizando Firesharp (Firebase);
-- Tests: Camada de teste onde são feitos os testes unitários utilizando moq e xunit;
+- Tests: Camada de teste onde são feitos os testes unitários utilizando moq e xunit.
 
 # Como rodar
 ## Requisitos para rodar
 - Para Rodar é necessário: 
-	- [.Net Core Runtime 3.1](https://dotnet.microsoft.com/download)
-	- [AspnetCore Runtime 3.1](https://dotnet.microsoft.com/download)
+	- [.Net Core Runtime 3.1](https://dotnet.microsoft.com/download);
+	- [AspnetCore Runtime 3.1](https://dotnet.microsoft.com/download);
 	
 	
 	
