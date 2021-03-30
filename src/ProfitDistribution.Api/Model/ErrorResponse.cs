@@ -6,10 +6,10 @@ namespace ProfitDistribution.Api.Model
 {
     public class ErrorResponse
     {
-        public int Codigo { get; set; }
-        public string Mensagem { get; set; }
+        public int Code { get; set; }
+        public string Message { get; set; }
         public ErrorResponse InnerError { get; set; }
-        public string[] Detalhes { get; set; }
+        public string[] Details { get; set; }
 
         public static ErrorResponse From(Exception ex)
         {
@@ -19,8 +19,8 @@ namespace ProfitDistribution.Api.Model
             }
             return new ErrorResponse
             {
-                Codigo = ex.HResult,
-                Mensagem = ex.Message,
+                Code = ex.HResult,
+                Message = ex.Message,
                 InnerError = ErrorResponse.From(ex.InnerException)
             };
         }
@@ -30,9 +30,9 @@ namespace ProfitDistribution.Api.Model
             var erros = modelState.Values.SelectMany(m => m.Errors);
             return new ErrorResponse
             {
-                Codigo = 100,
-                Mensagem = "Houve um erro(s) o envio da Requisição",
-                Detalhes = erros.Select(e => e.ErrorMessage).ToArray(),
+                Code = 100,
+                Message = "Houve um erro(s) o envio da Requisição",
+                Details = erros.Select(e => e.ErrorMessage).ToArray(),
                 InnerError = null,
             };
         }
