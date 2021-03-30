@@ -82,5 +82,22 @@ namespace ProfitDistribution.Tests.API
             var statusCode = (ret as OkObjectResult).StatusCode;
             Assert.Equal(200, statusCode);
         }
+
+        [Fact]
+        public async Task WhenGetWithException_ThrowsExcpetion()
+        {
+            var mockMapper = new Mock<IMapper>();
+            var mock = new Mock<IEmployeeServices>();
+            var mockLogger = new Mock<ILogger<EmployeeController>>();
+            mock.Setup(s => s.GetAllEmployeesAsync()).Throws(new Exception());
+
+            var services = mock.Object;
+            var mapper = mockMapper.Object;
+            var logger = mockLogger.Object;
+
+            var controller = new EmployeeController(services, mapper, logger);
+
+            await Assert.ThrowsAsync<Exception>(() => controller.Get());
+        }
     }
 }

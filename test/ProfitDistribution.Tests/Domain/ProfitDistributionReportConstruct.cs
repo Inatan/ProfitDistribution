@@ -61,9 +61,9 @@ namespace ProfitDistribution.Tests.Domain
             List<Participation> participations = participationServices.GenerateParticipations(employees).ToList();
             ProfitDistributionReport report = new ProfitDistributionReport(participations,valueToDistribution);
 
-            Assert.Equal(sumExpected, report.Total_distribuido);
-            Assert.Equal(countExpeted, report.Total_de_funcionarios);
-            Assert.Equal(expectedBalance, report.Saldo_total_disponibilizado);
+            Assert.Equal(sumExpected, report.DistributedTotal);
+            Assert.Equal(countExpeted, report.EmployeeTotal);
+            Assert.Equal(expectedBalance, report.AvailableTotalBalace);
         }
     }
 }

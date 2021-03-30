@@ -30,12 +30,12 @@ namespace ProfitDistribution.Tests.API
             var controller = new EmployeeController(services, mapper, logger);
             var model = new EmployeeDTO()
             {
-                Matricula = "0014319",
-                Nome = "Abraham Jones",
-                Area = "Diretoria",
-                Cargo = "Diretor Tecnologia",
-                Salario_bruto = "R$ 18.053,25",
-                Data_de_admissao = new DateTime(2016, 07, 05)
+                RegistrationId = "0014319",
+                Name = "Abraham Jones",
+                OccupationArea = "Diretoria",
+                Office = "Diretor Tecnologia",
+                GrossSalary = "R$ 18.053,25",
+                AdmissionDate = new DateTime(2016, 07, 05)
             };
             var ret = await controller.Post(model);
 
@@ -58,17 +58,36 @@ namespace ProfitDistribution.Tests.API
             var controller = new EmployeeController(services, mapper, logger);
             var model = new EmployeeDTO()
             {
-                Matricula = "0014319",
-                Nome = "Abraham Jones",
-                Area = "Diretoria",
-                Cargo = "Diretor Tecnologia",
-                Salario_bruto = "R$ 18.053,25",
-                Data_de_admissao = new DateTime(2016, 07, 05)
+                RegistrationId = "0014319",
+                Name = "Abraham Jones",
+                OccupationArea = "Diretoria",
+                Office = "Diretor Tecnologia",
+                GrossSalary = "R$ 18.053,25",
+                AdmissionDate = new DateTime(2016, 07, 05)
             };
             var ret = await controller.Post(model);
 
             var statusCode = (ret as ConflictObjectResult).StatusCode;
             Assert.Equal(409, statusCode);
+        }
+
+        [Fact]
+        public async Task WhenPostWithException_ThrowsExcpetion()
+        {
+            var mockMapper = new Mock<IMapper>();
+            var mock = new Mock<IEmployeeServices>();
+            var mockLogger = new Mock<ILogger<EmployeeController>>();
+            var mockModel = new Mock<EmployeeDTO>();
+            mock.Setup(s => s.InsertNewAsync(It.IsAny<Employee>())).Throws(new Exception());
+
+            var services = mock.Object;
+            var mapper = mockMapper.Object;
+            var logger = mockLogger.Object;
+            var model = mockModel.Object;
+
+            var controller = new EmployeeController(services, mapper, logger);
+           
+            await Assert.ThrowsAsync<Exception>(() => controller.Post(model));
         }
 
         [Fact]
@@ -101,30 +120,30 @@ namespace ProfitDistribution.Tests.API
             {
                 new EmployeeDTO()
                 {
-                    Matricula = "0014319",
-                    Nome = "Abraham Jones",
-                    Area = "Diretoria",
-                    Cargo = "Diretor Tecnologia",
-                    Salario_bruto = "R$ 18.053,25",
-                    Data_de_admissao = new DateTime(2016, 07, 05)
+                    RegistrationId = "0014319",
+                    Name = "Abraham Jones",
+                    OccupationArea = "Diretoria",
+                    Office = "Diretor Tecnologia",
+                    GrossSalary = "R$ 18.053,25",
+                    AdmissionDate = new DateTime(2016, 07, 05)
                 },
                 new EmployeeDTO()
                 {
-                    Matricula = "0014319",
-                    Nome = "Abraham Jones",
-                    Area = "Diretoria",
-                    Cargo = "Diretor Tecnologia",
-                    Salario_bruto = "R$ 18.053,25",
-                    Data_de_admissao = new DateTime(2016, 07, 05)
+                    RegistrationId = "0014319",
+                    Name = "Abraham Jones",
+                    OccupationArea = "Diretoria",
+                    Office = "Diretor Tecnologia",
+                    GrossSalary = "R$ 18.053,25",
+                    AdmissionDate = new DateTime(2016, 07, 05)
                 },
                 new EmployeeDTO()
                 {
-                    Matricula = "0014319",
-                    Nome = "Abraham Jones",
-                    Area = "Diretoria",
-                    Cargo = "Diretor Tecnologia",
-                    Salario_bruto = "R$ 18.053,25",
-                    Data_de_admissao = new DateTime(2016, 07, 05)
+                    RegistrationId = "0014319",
+                    Name = "Abraham Jones",
+                    OccupationArea = "Diretoria",
+                    Office = "Diretor Tecnologia",
+                    GrossSalary = "R$ 18.053,25",
+                    AdmissionDate = new DateTime(2016, 07, 05)
                 },
             };
 

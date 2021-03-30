@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using ProfitDistribution.Api.Attributes;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ProfitDistribution.Api.DTO
 {
@@ -8,6 +9,7 @@ namespace ProfitDistribution.Api.DTO
     {
         [Required(ErrorMessage = "total_disponibilizado é obrigatório")]
         [Money(ErrorMessage = "total_disponibilizado deve formato monetário (R$ XX,XX) e positivo")]
-        public string total_disponibilizado { get; set; }
+        [JsonPropertyName("total_disponibilizado")]
+        public string AvailableTotal { get; set; }
     }
 }

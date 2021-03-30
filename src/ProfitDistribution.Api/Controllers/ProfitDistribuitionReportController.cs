@@ -50,7 +50,7 @@ namespace ProfitDistribution.Api.Controllers
                 return BadRequest(ErrorResponse.FromModelState(ModelState));
             }
             
-            var report = await _services.PresentReport(distributeValueDTO.total_disponibilizado);
+            var report = await _services.PresentReport(distributeValueDTO.AvailableTotal);
             var reportDTO = _mapper.Map<ProfitDistributionReportDTO>(report);
 
             return Ok(reportDTO);

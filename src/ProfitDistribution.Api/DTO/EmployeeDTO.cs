@@ -1,28 +1,34 @@
 ﻿using ProfitDistribution.Api.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ProfitDistribution.Api.DTO
 {
     public class EmployeeDTO
     {
         [Required(ErrorMessage = "matricula é obrigatória")]
-        public string Matricula { get; set; }
+        [JsonPropertyName("matricula")]
+        public string RegistrationId { get; set; }
         [Required(ErrorMessage = "nome é obrigatório")]
-        
-        public string Nome { get; set; }
+        [JsonPropertyName("nome")]
+        public string Name { get; set; }
         [Required(ErrorMessage = "area é obrigatória")]
-        [Area(ErrorMessage = "area só pode ser (Diretoria, Contabilidade, Financeiro, Tecnologia, Serviços Gerais e Relacionamento com o Cliente)")]
-        public string Area { get; set; }
+        [Area]
+        [JsonPropertyName("area")]
+        public string OccupationArea { get; set; }
         [Required(ErrorMessage = "cargo é obrigatório")]
-        public string Cargo { get; set; }
+        [JsonPropertyName("cargo")]
+        public string Office { get; set; }
         [Required(ErrorMessage = "salario_bruto é obrigatório")]
         [Money(ErrorMessage = "salario_bruto deve estar em um formato monetário (R$ XX,XX) e positivo")]
-        public string Salario_bruto { get; set; }
+        [JsonPropertyName("salario_bruto")]
+        public string GrossSalary { get; set; }
         [Required(ErrorMessage = "data_de_admissao é obrigatória")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         [DataType(DataType.Date)]
-        [Admission(ErrorMessage = "data_de_admissao não pode ser maior que a data atual")]
-        public DateTime Data_de_admissao { get; set; }
+        [Admission]
+        [JsonPropertyName("data_de_admissao")]
+        public DateTime AdmissionDate { get; set; }
     }
 }

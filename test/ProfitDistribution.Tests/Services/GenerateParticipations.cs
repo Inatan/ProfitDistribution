@@ -58,7 +58,7 @@ namespace ProfitDistribution.Tests.Services
             ParticipationServices participationServices = new ParticipationServices(new SalaryServices(1100.00M));
             List<Participation> participations = participationServices.GenerateParticipations(employees).ToList();
             int countResult = participations.Count;
-            decimal sumResult = participations.Sum(p => p.Valor_da_participacao);
+            decimal sumResult = participations.Sum(p => p.ParticipationValue);
 
             Assert.Equal(countExpected, countResult);
             Assert.Equal(sumExpected, sumExpected);

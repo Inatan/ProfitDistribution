@@ -4,8 +4,16 @@ namespace ProfitDistribution.Services.Handlers
 {
     public class WageWeightServices : IWeightServices
     {
-        public int Categorize(Employee employee, decimal salary)
+        private readonly SalaryServices _salaryServices;
+
+        public WageWeightServices(SalaryServices salaryServices)
         {
+            _salaryServices = salaryServices;
+        }
+
+        public int Categorize(Employee employee)
+        {
+            decimal salary = _salaryServices.GetSalary();
             int quantityWage = employee.MeasureQuantityMinimalSalaries(salary);
             if (employee.Cargo == "Estagiário" || quantityWage <= 3)
                 return 1;

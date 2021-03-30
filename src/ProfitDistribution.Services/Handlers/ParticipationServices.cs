@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using ProfitDistribution.Domain.Model;
+﻿using ProfitDistribution.Domain.Model;
 using System.Collections.Generic;
 
 namespace ProfitDistribution.Services.Handlers
@@ -18,11 +17,11 @@ namespace ProfitDistribution.Services.Handlers
 
             AdmissionTimeWeightServices admissionWeight = new AdmissionTimeWeightServices();
             AreaWeightServises areaWeight = new AreaWeightServises();
-            WageWeightServices wageWeight = new WageWeightServices();
+            WageWeightServices wageWeight = new WageWeightServices(_salaryServices);
 
             int admission = calculatorHandler.Calculate(admissionWeight, employee);
             int area = calculatorHandler.Calculate(areaWeight, employee);
-            int wage = calculatorHandler.Calculate(wageWeight, employee, _salaryServices.GetSalary());
+            int wage = calculatorHandler.Calculate(wageWeight, employee);
 
             Participation participation = new Participation(employee, admission,area,wage);
             return participation;

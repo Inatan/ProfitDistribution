@@ -20,15 +20,15 @@ namespace ProfitDistribution.Tests.API
             var mockMapper = new Mock<IMapper>();
             var mockLogger = new Mock<ILogger<EmployeeController>>();
             var mock = new Mock<IEmployeeServices>();
-            
+
             mock.Setup(r => r.FindByKeyAsync(key)).ReturnsAsync(
                 new Employee()
-                { 
+                {
                     Matricula = "0014319",
-                    Nome = "Abraham Jones", 
-                    Area = "Diretoria", 
-                    Cargo = "Diretor Tecnologia", 
-                    Salario_bruto = 18053.25M, 
+                    Nome = "Abraham Jones",
+                    Area = "Diretoria",
+                    Cargo = "Diretor Tecnologia",
+                    Salario_bruto = 18053.25M,
                     Data_de_admissao = new DateTime(2016, 07, 05)
                 }
             );
@@ -37,7 +37,7 @@ namespace ProfitDistribution.Tests.API
             var logger = mockLogger.Object;
 
             var controller = new EmployeeController(services, mapper, logger);
-            
+
             var ret = await controller.Delete(key);
 
             var statusCode = (ret as StatusCodeResult).StatusCode;
@@ -64,5 +64,21 @@ namespace ProfitDistribution.Tests.API
             Assert.Equal(404, statusCode);
         }
 
+        public async Task WhenDeleteWithException_ThrowsExcpetion()
+        {
+            var mockMapper = new Mock<IMapper>();
+            var mock = new Mock<IEmployeeServices>();
+            var mockLogger = new Mock<ILogger<EmployeeController>>();
+            mock.Setup(s => s.DeleteAsync(It.IsAny<string>())).Throws(new Exception());
+
+            var services = mock.Object;
+            var mapper = mockMapper.Object;
+            var logger = mockLogger.Object;
+
+            var controller = new EmployeeController(services, mapper, logger);
+
+            await Assert.ThrowsAsync<Exception>(() => controller.Delete(It.IsAny<string>()));
+
+        }
     }
 }

@@ -6,19 +6,19 @@ namespace ProfitDistribution.Domain.Model
     public class ProfitDistributionReport
     {
         
-        public IEnumerable<Participation> Participacoes { get; set; }
-        public  int Total_de_funcionarios { get; set; }
-        public  decimal Total_distribuido { get; set; }
-        public decimal Total_disponibilizado { get; set; }
-        public decimal Saldo_total_disponibilizado { get; set; }
+        public IEnumerable<Participation> Participations { get; set; }
+        public  int EmployeeTotal { get; set; }
+        public  decimal DistributedTotal { get; set; }
+        public decimal AvailableTotal { get; set; }
+        public decimal AvailableTotalBalace { get; set; }
 
-        public ProfitDistributionReport(IEnumerable<Participation> participacoes, decimal total_disponibilizado)
+        public ProfitDistributionReport(IEnumerable<Participation> participations, decimal availableTotal)
         {
-            this.Participacoes = participacoes;
-            this.Total_disponibilizado = total_disponibilizado;
-            this.Total_de_funcionarios = participacoes.Count();
-            this.Total_distribuido = participacoes.Sum(p => p.Valor_da_participacao);
-            this.Saldo_total_disponibilizado = this.Total_disponibilizado - this.Total_distribuido;
+            this.Participations = participations;
+            this.AvailableTotal = availableTotal;
+            this.EmployeeTotal = participations.Count();
+            this.DistributedTotal = participations.Sum(p => p.ParticipationValue);
+            this.AvailableTotalBalace = this.AvailableTotal - this.DistributedTotal;
         }
     }
 }

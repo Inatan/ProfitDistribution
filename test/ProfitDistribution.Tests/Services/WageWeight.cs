@@ -10,9 +10,10 @@ namespace ProfitDistribution.Tests.Services
        
         private int ActWageWeight(Employee employee)
         {
-            WageWeightServices wageWeight = new WageWeightServices();
+            SalaryServices salaryServices = new SalaryServices(1100.00M);
+            WageWeightServices wageWeight = new WageWeightServices(salaryServices);
             WeightCalculatorServices calculatorHandler = new WeightCalculatorServices();
-            int weight = calculatorHandler.Calculate(wageWeight, employee,1100.00M);
+            int weight = calculatorHandler.Calculate(wageWeight, employee);
             return weight;
         }
 
