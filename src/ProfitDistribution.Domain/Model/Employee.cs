@@ -13,7 +13,7 @@ namespace ProfitDistribution.Domain.Model
 
         public int AdmissionYear()
         { 
-            return DateTime.Today.Year - Data_de_admissao.Year;
+            return ((new DateTime(1, 1, 1)) + (DateTime.Today - Data_de_admissao)).Year;
         }
 
         public int MeasureQuantityMinimalSalaries(decimal minimalSalary)

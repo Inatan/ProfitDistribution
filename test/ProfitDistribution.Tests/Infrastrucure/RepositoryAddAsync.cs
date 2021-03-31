@@ -1,5 +1,6 @@
 ﻿using Moq;
 using ProfitDistribution.Infrastructure;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ProfitDistribution.Tests.Infrastrucure
@@ -7,7 +8,7 @@ namespace ProfitDistribution.Tests.Infrastrucure
     public class RepositoryAddAsync
     {
         [Fact]
-        public void AddNewEntity_EntityObjectIsNotNull()
+        public async Task AddNewEntity_EntityObjectIsNotNull()
         {
             object obj = new object();
             string key = "000112";
@@ -15,10 +16,10 @@ namespace ProfitDistribution.Tests.Infrastrucure
             var repo = mock.Object;
 
             //act
-            repo.AddAsync(key, obj);
+            await repo.AddAsync(key, obj);
 
             //assert
-            var ret = repo.FindAsync(key);
+            var ret = await repo.FindAsync(key);
             Assert.NotNull(ret);
         }
     }
