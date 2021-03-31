@@ -22,12 +22,12 @@ namespace ProfitDistribution.Tests.Services
         {
             Employee employee = new Employee()
             {
-                Matricula = "0002105", 
-                Nome ="Dorthy Lee", 
-                Area = "Financeiro", 
-                Cargo ="Estagiário", 
-                Salario_bruto = 1491.45M, 
-                Data_de_admissao = new DateTime(2015, 03, 16)
+                RegistrationId = "0002105", 
+                Name ="Dorthy Lee", 
+                OccupationArea = "Financeiro", 
+                Office ="Estagiário", 
+                GrossSalary = 1491.45M, 
+                AdmissionDate = new DateTime(2015, 03, 16)
             };
             int weight = ActWageWeight(employee);
             Assert.Equal(1, weight);
@@ -39,12 +39,12 @@ namespace ProfitDistribution.Tests.Services
             Employee employee = 
                 new Employee()
                 {
-                    Matricula = "0007361",
-                    Nome = "Avila Kane",
-                    Area = "Contabilidade",
-                    Cargo = "Auxiliar Administrativo",
-                    Salario_bruto = 2166.25M,
-                    Data_de_admissao = new DateTime(2016, 09, 16) 
+                    RegistrationId = "0007361",
+                    Name = "Avila Kane",
+                    OccupationArea = "Contabilidade",
+                    Office = "Auxiliar Administrativo",
+                    GrossSalary = 2166.25M,
+                    AdmissionDate = new DateTime(2016, 09, 16) 
                 };
             int weight = ActWageWeight(employee);
             Assert.Equal(1, weight);
@@ -56,12 +56,12 @@ namespace ProfitDistribution.Tests.Services
             Employee employee = 
                 new Employee()
                 { 
-                    Matricula = "0002949", 
-                    Nome = "Stephenson Stone", 
-                    Area = "Financeiro", 
-                    Cargo = "Analista de Finanças", 
-                    Salario_bruto = 5694.14M, 
-                    Data_de_admissao = new DateTime(2015, 03, 16) 
+                    RegistrationId = "0002949", 
+                    Name = "Stephenson Stone", 
+                    OccupationArea = "Financeiro", 
+                    Office = "Analista de Finanças", 
+                    GrossSalary = 5694.14M, 
+                    AdmissionDate = new DateTime(2015, 03, 16) 
                 };
             int weight = ActWageWeight(employee);
             Assert.Equal(2, weight);
@@ -73,12 +73,12 @@ namespace ProfitDistribution.Tests.Services
         {
             Employee employee = new Employee()
             {
-                Matricula = "0002949",
-                Nome = "Stephenson Stone",
-                Area = "Financeiro",
-                Cargo = "Analista de Finanças",
-                Salario_bruto = 7694.14M,
-                Data_de_admissao = new DateTime(2015, 03, 16)
+                RegistrationId = "0002949",
+                Name = "Stephenson Stone",
+                OccupationArea = "Financeiro",
+                Office = "Analista de Finanças",
+                GrossSalary = 7694.14M,
+                AdmissionDate = new DateTime(2015, 03, 16)
             };
             int weight = ActWageWeight(employee);
             Assert.Equal(3, weight);
@@ -89,12 +89,12 @@ namespace ProfitDistribution.Tests.Services
         {
             Employee employee = new Employee()
             { 
-                Matricula = "0009968", 
-                Nome = "Victor Wilson", 
-                Area = "Diretoria",
-                Cargo = "Diretor Financeiro", 
-                Salario_bruto = 12696.20M, 
-                Data_de_admissao = new DateTime(2012, 01, 05) 
+                RegistrationId = "0009968", 
+                Name = "Victor Wilson", 
+                OccupationArea = "Diretoria",
+                Office = "Diretor Financeiro", 
+                GrossSalary = 12696.20M, 
+                AdmissionDate = new DateTime(2012, 01, 05) 
             };
             int weight = ActWageWeight(employee);
             Assert.Equal(5, weight);

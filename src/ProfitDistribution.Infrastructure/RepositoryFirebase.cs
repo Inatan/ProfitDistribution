@@ -36,11 +36,11 @@ namespace ProfitDistribution.Infrastructure
             SetResponse response = null;
             
             response = await _context.GetClient().SetAsync(path, obj);
-            if (response.StatusCode != System.Net.HttpStatusCode.Created)
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 Thread.Sleep(2000);
                 response = await _context.GetClient().SetAsync(path, obj);
-                if(response.StatusCode != System.Net.HttpStatusCode.Created)
+                if(response.StatusCode != System.Net.HttpStatusCode.OK)
                     throw new KeyNotFoundException("Falha ao realizar ao adicionar na base");
             }
         }

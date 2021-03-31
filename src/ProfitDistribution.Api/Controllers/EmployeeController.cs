@@ -92,7 +92,7 @@ namespace ProfitDistribution.Api.Controllers
             bool isSuccess = await _services.InsertNewAsync(mappedEmployee);
             if(isSuccess)
             { 
-                var uri = Url==null ? "/": Url.Action("Get", new { matricula = mappedEmployee.Matricula });
+                var uri = Url==null ? "/": Url.Action("Get", new { matricula = mappedEmployee.RegistrationId });
                 return Created(uri, mappedEmployee);
             }
             else
@@ -104,12 +104,13 @@ namespace ProfitDistribution.Api.Controllers
             
         }
 
-        [HttpPost("/list")]
+        [HttpPost]
         [SwaggerOperation(Summary = "Registra novos funcionários na base.")]
         [ProducesResponseType(statusCode: 201, Type = typeof(List<EmployeeDTO>))]
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 409, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 404, Type = typeof(ErrorResponse))]
+        [Route("list")]
         public async Task<IActionResult> PostList([FromBody] IList<EmployeeDTO> employeesDTO)
         {
             if (!ModelState.IsValid)

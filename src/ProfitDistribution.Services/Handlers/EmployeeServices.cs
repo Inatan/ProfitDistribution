@@ -33,12 +33,12 @@ namespace ProfitDistribution.Services.Handlers
         public bool ValidateEmployeeValues(Employee employee)
         {
             string errorMessage = string.Empty;
-            if (employee.Salario_bruto < 0)
+            if (employee.GrossSalary < 0)
                 errorMessage += "Salário bruto deve ser maior que zero. ";
-            if(employee.Data_de_admissao > DateTime.Now)
+            if(employee.AdmissionDate > DateTime.Now)
                 errorMessage += "Data de admissão não pode ser maior que a data atual. ";
             var validAreas = EnumExtensions.GetEnumDescriptions<Area>().ToArray();
-            if(Array.IndexOf(validAreas,employee.Area)< 0)
+            if(Array.IndexOf(validAreas,employee.OccupationArea)< 0)
                 errorMessage += "Área só pode ser(Diretoria, Contabilidade, Financeiro, Tecnologia, Serviços Gerais e Relacionamento com o Cliente). ";
 
             if (!string.IsNullOrEmpty(errorMessage))
@@ -60,14 +60,14 @@ namespace ProfitDistribution.Services.Handlers
         {
             if(ValidateEmployeeList(employees))
             {
-                var allValues = (await _repo.GetAllAsync()).Select(v => v.Value.Matricula);
-                if (employees.Where(e => allValues.Contains(e.Matricula)).Any())
+                var allValues = (await _repo.GetAllAsync()).Select(v => v.Value.RegistrationId);
+                if (employees.Where(e => allValues.Contains(e.RegistrationId)).Any())
                 {
                     return false;
                 }
                 foreach (var employee in employees)
                 {
-                    await _repo.AddAsync(employee.Matricula, employee);
+                    await _repo.AddAsync(employee.RegistrationId, employee);
                 }
                 return true;
             }
@@ -76,9 +76,9 @@ namespace ProfitDistribution.Services.Handlers
         
         public async Task<bool> InsertNewAsync(Employee employee)
         {
-            if (ValidateEmployeeValues(employee) && await _repo.FindAsync(employee.Matricula) == null)
+            if (ValidateEmployeeValues(employee) && await _repo.FindAsync(employee.RegistrationId) == null)
             {    
-                await _repo.AddAsync(employee.Matricula, employee);
+                await _repo.AddAsync(employee.RegistrationId, employee);
                 return true;
             }
             
@@ -89,7 +89,7 @@ namespace ProfitDistribution.Services.Handlers
         {
             if(ValidateEmployeeValues(employee))
             {
-                await _repo.UpdateAsync(employee.Matricula, employee);
+                await _repo.UpdateAsync(employee.RegistrationId, employee);
             }
         }
     }

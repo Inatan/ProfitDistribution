@@ -21,36 +21,36 @@ namespace ProfitDistribution.Tests.Domain
                         "0014319",
                         new Employee()
                         {
-                           Matricula = "0014319", 
-                           Nome = "Abraham Jones", 
-                           Area = "Diretoria", 
-                           Cargo = "Diretor Tecnologia", 
-                           Salario_bruto = 18053.25M, 
-                           Data_de_admissao = new DateTime(2016, 07, 05) 
+                           RegistrationId = "0014319", 
+                           Name = "Abraham Jones", 
+                           OccupationArea = "Diretoria", 
+                           Office = "Diretor Tecnologia", 
+                           GrossSalary = 18053.25M, 
+                           AdmissionDate = new DateTime(2016, 07, 05) 
                         } 
                     },
                     { 
                         "0004468",
                         new Employee()
                         {
-                            Matricula ="0004468",
-                            Nome ="Flossie Wilson",
-                            Area ="Contabilidade",
-                            Cargo ="Auxiliar de Contabilidade",
-                            Salario_bruto = 1396.52M,
-                            Data_de_admissao = new DateTime(2015, 01, 05)
+                            RegistrationId ="0004468",
+                            Name ="Flossie Wilson",
+                            OccupationArea ="Contabilidade",
+                            Office ="Auxiliar de Contabilidade",
+                            GrossSalary = 1396.52M,
+                            AdmissionDate = new DateTime(2015, 01, 05)
                         }
                     },
                     { 
                         "0002949",
                         new Employee() 
                         {
-                            Matricula ="0002949",
-                            Nome ="Stephenson Stone",
-                            Area ="Financeiro",
-                            Cargo ="Analista de Finanças", 
-                            Salario_bruto =5694.14M, 
-                            Data_de_admissao = new DateTime(2014, 01, 26) 
+                            RegistrationId ="0002949",
+                            Name ="Stephenson Stone",
+                            OccupationArea ="Financeiro",
+                            Office ="Analista de Finanças", 
+                            GrossSalary =5694.14M, 
+                            AdmissionDate = new DateTime(2014, 01, 26) 
                         }
                     }
                 };

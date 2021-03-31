@@ -13,12 +13,12 @@ namespace ProfitDistribution.Tests.Services
             Employee employee = 
                 new Employee()
                 {
-                    Matricula = "0014319",
-                    Nome = "Abraham Jones",
-                    Area = "Diretoria",
-                    Cargo = "Diretor Tecnologia",
-                    Salario_bruto = 18053.25M,
-                    Data_de_admissao = new DateTime(2016, 07, 05)
+                    RegistrationId = "0014319",
+                    Name = "Abraham Jones",
+                    OccupationArea = "Diretoria",
+                    Office = "Diretor Tecnologia",
+                    GrossSalary = 18053.25M,
+                    AdmissionDate = new DateTime(2016, 07, 05)
                 };
             ParticipationServices participationServices = new ParticipationServices(new SalaryServices(1100.00M));
             Participation participationResult = participationServices.EmployeeToParticipation(employee);

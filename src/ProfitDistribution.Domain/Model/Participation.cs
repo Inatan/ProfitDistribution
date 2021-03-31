@@ -11,9 +11,9 @@
         
         public Participation(Employee employee, int timeWeight, int areaWeight, int wageWeight)
         {
-            RegistrationID = employee.Matricula;
-            Name = employee.Nome;
-            ParticipationValue = Calculate(employee.Salario_bruto, timeWeight, areaWeight, wageWeight);
+            RegistrationID = employee.RegistrationId;
+            Name = employee.Name;
+            ParticipationValue = Calculate(employee.GrossSalary, timeWeight, areaWeight, wageWeight);
         }
 
         public Participation() { }

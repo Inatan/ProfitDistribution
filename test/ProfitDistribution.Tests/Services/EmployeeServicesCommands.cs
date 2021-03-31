@@ -22,7 +22,7 @@ namespace ProfitDistribution.Tests.Services
             services.InsertNewAsync(obj);
 
             //assert
-            var ret = services.FindByKeyAsync(obj.Matricula);
+            var ret = services.FindByKeyAsync(obj.RegistrationId);
             Assert.NotNull(ret);
         }
 
@@ -37,7 +37,7 @@ namespace ProfitDistribution.Tests.Services
             services.UpdateAsync(obj);
 
             //assert
-            var ret = services.FindByKeyAsync(obj.Matricula);
+            var ret = services.FindByKeyAsync(obj.RegistrationId);
             Assert.NotNull(ret);
         }
 
@@ -109,30 +109,30 @@ namespace ProfitDistribution.Tests.Services
             var services = new EmployeeServices(repository);
             Employee employee = new Employee()
             {
-                Matricula = "0014319",
-                Nome = "Abraham Jones",
-                Area = "Diretoria",
-                Cargo = "Diretor Tecnologia",
-                Salario_bruto = 18053.25M,
-                Data_de_admissao = new DateTime(2022, 07, 05)
+                RegistrationId = "0014319",
+                Name = "Abraham Jones",
+                OccupationArea = "Diretoria",
+                Office = "Diretor Tecnologia",
+                GrossSalary = 18053.25M,
+                AdmissionDate = new DateTime(2022, 07, 05)
             };
             Employee employee2 = new Employee()
             {
-                Matricula = "0014319",
-                Nome = "Abraham Jones",
-                Area = "Diretoria",
-                Cargo = "Diretor Tecnologia",
-                Salario_bruto = -18053.25M,
-                Data_de_admissao = new DateTime(2016, 07, 05)
+                RegistrationId = "0014319",
+                Name = "Abraham Jones",
+                OccupationArea = "Diretoria",
+                Office = "Diretor Tecnologia",
+                GrossSalary = -18053.25M,
+                AdmissionDate = new DateTime(2016, 07, 05)
             };
             Employee employee3 = new Employee()
             {
-                Matricula = "0014319",
-                Nome = "Abraham Jones",
-                Area = "Diretoriaaa",
-                Cargo = "Diretor Tecnologia",
-                Salario_bruto = 18053.25M,
-                Data_de_admissao = new DateTime(2016, 07, 05)
+                RegistrationId = "0014319",
+                Name = "Abraham Jones",
+                OccupationArea = "Diretoriaaa",
+                Office = "Diretor Tecnologia",
+                GrossSalary = 18053.25M,
+                AdmissionDate = new DateTime(2016, 07, 05)
             };
             //act
             //assert
@@ -150,12 +150,12 @@ namespace ProfitDistribution.Tests.Services
             var services = new EmployeeServices(repository);
             Employee employee = new Employee()
             {
-                Matricula = "0014319",
-                Nome = "Abraham Jones",
-                Area = "Diretoria",
-                Cargo = "Diretor Tecnologia",
-                Salario_bruto = 18053.25M,
-                Data_de_admissao = new DateTime(2016, 07, 05)
+                RegistrationId = "0014319",
+                Name = "Abraham Jones",
+                OccupationArea = "Diretoria",
+                Office = "Diretor Tecnologia",
+                GrossSalary = 18053.25M,
+                AdmissionDate = new DateTime(2016, 07, 05)
             };
 
             //act
@@ -175,39 +175,39 @@ namespace ProfitDistribution.Tests.Services
             {
                 new Employee()
                 {
-                    Matricula = "0014319",
-                    Nome = "Abraham Jones",
-                    Area = "Diretoria",
-                    Cargo = "Diretor Tecnologia",
-                    Salario_bruto = 18053.25M,
-                    Data_de_admissao = new DateTime(2022, 07, 05)
+                    RegistrationId = "0014319",
+                    Name = "Abraham Jones",
+                    OccupationArea = "Diretoria",
+                    Office = "Diretor Tecnologia",
+                    GrossSalary = 18053.25M,
+                    AdmissionDate = new DateTime(2022, 07, 05)
                 },
                 new Employee()
                 {
-                        Matricula = "0014319",
-                        Nome = "Abraham Jones",
-                        Area = "Diretoria",
-                        Cargo = "Diretor Tecnologia",
-                        Salario_bruto = 18053.25M,
-                        Data_de_admissao = new DateTime(2022, 07, 05)
+                        RegistrationId = "0014319",
+                        Name = "Abraham Jones",
+                        OccupationArea = "Diretoria",
+                        Office = "Diretor Tecnologia",
+                        GrossSalary = 18053.25M,
+                        AdmissionDate = new DateTime(2022, 07, 05)
                 },
                 new Employee()
                 {
-                        Matricula = "0014319",
-                        Nome = "Abraham Jones",
-                        Area = "Diretoria",
-                        Cargo = "Diretor Tecnologia",
-                        Salario_bruto = 18053.25M,
-                        Data_de_admissao = new DateTime(2022, 07, 05)
+                        RegistrationId = "0014319",
+                        Name = "Abraham Jones",
+                        OccupationArea = "Diretoria",
+                        Office = "Diretor Tecnologia",
+                        GrossSalary = 18053.25M,
+                        AdmissionDate = new DateTime(2022, 07, 05)
                 },
                 new Employee()
                 {
-                    Matricula = "0014319",
-                    Nome = "Abraham Jones",
-                    Area = "Diretoria",
-                    Cargo = "Diretor Tecnologia",
-                    Salario_bruto = 18053.25M,
-                    Data_de_admissao = new DateTime(2016, 07, 05)
+                    RegistrationId = "0014319",
+                    Name = "Abraham Jones",
+                    OccupationArea = "Diretoria",
+                    Office = "Diretor Tecnologia",
+                    GrossSalary = 18053.25M,
+                    AdmissionDate = new DateTime(2016, 07, 05)
                 },
             };
             //act
@@ -226,21 +226,21 @@ namespace ProfitDistribution.Tests.Services
             {
                 new Employee()
                 {
-                    Matricula = "0014319",
-                    Nome = "Abraham Jones",
-                    Area = "Diretoria",
-                    Cargo = "Diretor Tecnologia",
-                    Salario_bruto = 18053.25M,
-                    Data_de_admissao = new DateTime(2016, 07, 05)
+                    RegistrationId = "0014319",
+                    Name = "Abraham Jones",
+                    OccupationArea = "Diretoria",
+                    Office = "Diretor Tecnologia",
+                    GrossSalary = 18053.25M,
+                    AdmissionDate = new DateTime(2016, 07, 05)
                 },
                 new Employee()
                 {
-                    Matricula ="0004468",
-                    Nome ="Flossie Wilson",
-                    Area ="Contabilidade",
-                    Cargo ="Auxiliar de Contabilidade",
-                    Salario_bruto = 1396.52M,
-                    Data_de_admissao = new DateTime(2015, 01, 05)
+                    RegistrationId ="0004468",
+                    Name ="Flossie Wilson",
+                    OccupationArea ="Contabilidade",
+                    Office ="Auxiliar de Contabilidade",
+                    GrossSalary = 1396.52M,
+                    AdmissionDate = new DateTime(2015, 01, 05)
                 },
             };
             //act

@@ -15,7 +15,7 @@ namespace ProfitDistribution.Services.Handlers
         {
             decimal salary = _salaryServices.GetSalary();
             int quantityWage = employee.MeasureQuantityMinimalSalaries(salary);
-            if (employee.Cargo == "Estagiário" || quantityWage <= 3)
+            if (employee.Office == "Estagiário" || quantityWage <= 3)
                 return 1;
             else if(quantityWage > 3 && quantityWage <= 5)
                 return 2;

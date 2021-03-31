@@ -126,21 +126,11 @@ namespace ProfitDistribution.Api
                 config =>
                 {
                     config.CreateMap<EmployeeDTO, Employee>()
-                        .ForMember(d => d.Salario_bruto,
-                        s => s.MapFrom(s => Decimal.Parse(s.GrossSalary, NumberStyles.Currency))) // Here
-                        .ForMember(d => d.Matricula,
-                        s => s.MapFrom(s => s.RegistrationId))
-                        .ForMember(d => d.Area,
-                        s => s.MapFrom(s => s.OccupationArea))
-                        .ForMember(d => d.Cargo,
-                        s => s.MapFrom(s => s.Office))
-                        .ForMember(d => d.Data_de_admissao,
-                        s => s.MapFrom(s => s.AdmissionDate))
-                        .ForMember(d => d.Nome,
-                        s => s.MapFrom(s => s.Name))
+                        .ForMember(d => d.GrossSalary,
+                        s => s.MapFrom(s => Decimal.Parse(s.GrossSalary, NumberStyles.Currency)))
                     .ReverseMap()
                     .ForMember(d => d.GrossSalary,
-                        s => s.MapFrom(s => s.Salario_bruto.ToString("C2")));
+                        s => s.MapFrom(s => s.GrossSalary.ToString("C2")));
 
                     config.CreateMap<Participation, ParticipationDTO>()
                         .ForMember(d => d.ParticiapationValue,
