@@ -16,6 +16,9 @@ Api de Distribuição de lucros que é responsável por:
 - Tests: Camada de teste onde são feitos os testes unitários utilizando moq e xunit.
 
 # Como rodar
+## Link Aplicação publicada
+- http://profit-distribution.herokuapp.com
+
 ## Requisitos para rodar
 - Para Rodar é necessário: 
 	- [.Net Core Runtime 3.1](https://dotnet.microsoft.com/download);
@@ -27,7 +30,7 @@ Api de Distribuição de lucros que é responsável por:
 ```
 dotnet run --project src\ProfitDistribution.Api\ProfitDistribution.Api.csproj
 ```
-- Ao iniciar a aplicação as abrir (http://localhost:5000/swagger/index.html) para ver a documentação da API.
+- Ao iniciar a aplicação as abrir (http://localhost/index.html) para ver a documentação da API.
 
 - Para publicar API:
 ```
