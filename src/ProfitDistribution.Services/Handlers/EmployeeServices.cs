@@ -63,23 +63,22 @@ namespace ProfitDistribution.Services.Handlers
                 bool isValid = true;
                 foreach (var employee in employees)
                 {
-                    isValid &= await _repo.AnyAsync(employee.RegistrationId);
+                    isValid &= !await _repo.AnyAsync(employee.RegistrationId);
+                    if (!isValid)
+                        return isValid;
                 }
-                if(isValid)
+                foreach (var employee in employees)
                 {
-                    foreach (var employee in employees)
-                    {
-                        await _repo.AddAsync(employee.RegistrationId, employee);
-                    }
-                    return true;
+                    await _repo.AddAsync(employee.RegistrationId, employee);
                 }
+                return true;
             }
             return false;
         }
         
         public async Task<bool> InsertNewAsync(Employee employee)
         {
-            if (ValidateEmployeeValues(employee) && await _repo.AnyAsync(employee.RegistrationId))
+            if (ValidateEmployeeValues(employee) && !await _repo.AnyAsync(employee.RegistrationId))
             {    
                 await _repo.AddAsync(employee.RegistrationId, employee);
                 return true;
