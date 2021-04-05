@@ -59,6 +59,22 @@ namespace ProfitDistribution.Infrastructure
             }
         }
 
+        public async Task<bool> AnyAsync(string key)
+        {
+            FirebaseResponse response = null;
+            string path = $"{typeof(TEntity).Name}\\{key}";
+
+            response = await _context.GetClient().GetAsync(path);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                Thread.Sleep(2000);
+                response = await _context.GetClient().GetAsync(path);
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                    return false;
+            }
+            return response.Body != "null";
+        }
+
         public async Task<TEntity> FindAsync(string key)
         {
             FirebaseResponse response = null;
@@ -74,6 +90,24 @@ namespace ProfitDistribution.Infrastructure
                     throw new KeyNotFoundException("Falha ao recuperar dados da base");
             }
             entity = response.ResultAs<TEntity>();
+            return entity;
+        }
+
+        public async Task<TEntity> VerifyAsync(string key)
+        {
+            FirebaseResponse response = null;
+            TEntity entity = null;
+            string path = $"{typeof(TEntity).Name}\\{key}";
+
+            response = await _context.GetClient().GetAsync(path);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                Thread.Sleep(2000);
+                response = await _context.GetClient().GetAsync(path);
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                    throw new KeyNotFoundException("Falha ao recuperar dados da base");
+            }
+            entity = response. ResultAs<TEntity>();
             return entity;
         }
 

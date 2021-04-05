@@ -60,23 +60,26 @@ namespace ProfitDistribution.Services.Handlers
         {
             if(ValidateEmployeeList(employees))
             {
-                var allValues = (await _repo.GetAllAsync()).Select(v => v.Value.RegistrationId);
-                if (employees.Where(e => allValues.Contains(e.RegistrationId)).Any())
-                {
-                    return false;
-                }
+                bool isValid = true;
                 foreach (var employee in employees)
                 {
-                    await _repo.AddAsync(employee.RegistrationId, employee);
+                    isValid &= await _repo.AnyAsync(employee.RegistrationId);
                 }
-                return true;
+                if(isValid)
+                {
+                    foreach (var employee in employees)
+                    {
+                        await _repo.AddAsync(employee.RegistrationId, employee);
+                    }
+                    return true;
+                }
             }
             return false;
         }
         
         public async Task<bool> InsertNewAsync(Employee employee)
         {
-            if (ValidateEmployeeValues(employee) && await _repo.FindAsync(employee.RegistrationId) == null)
+            if (ValidateEmployeeValues(employee) && await _repo.AnyAsync(employee.RegistrationId))
             {    
                 await _repo.AddAsync(employee.RegistrationId, employee);
                 return true;

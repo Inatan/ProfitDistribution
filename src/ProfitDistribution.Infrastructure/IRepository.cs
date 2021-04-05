@@ -7,6 +7,7 @@ namespace ProfitDistribution.Infrastructure
     {
         Task<IDictionary<string, TEntity>> GetAllAsync();
         Task<TEntity> FindAsync(string key);
+        Task<bool> AnyAsync(string key);
         Task AddAsync(string key, TEntity obj);
         Task UpdateAsync(string key,TEntity obj);
         Task RemoveAsync(string key);
