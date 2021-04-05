@@ -18,9 +18,9 @@
 
         public Participation() { }
 
-        public string RegistrationID { get; set; }
-        public string Name { get; set; }
-        public decimal ParticipationValue { get; set; }
+        public readonly string RegistrationID;
+        public readonly string Name;
+        public readonly decimal ParticipationValue;
 
         public decimal Calculate(decimal salario_bruto, int timeWeight, int areaWeight, int wageWeight)
         {

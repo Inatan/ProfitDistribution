@@ -5,12 +5,12 @@ namespace ProfitDistribution.Domain.Model
 {
     public class ProfitDistributionReport
     {
-        
-        public IEnumerable<Participation> Participations { get; set; }
-        public  int EmployeeTotal { get; set; }
-        public  decimal DistributedTotal { get; set; }
-        public decimal AvailableTotal { get; set; }
-        public decimal AvailableTotalBalace { get; set; }
+
+        public readonly IEnumerable<Participation> Participations;
+        public readonly int EmployeeTotal;
+        public readonly decimal DistributedTotal;
+        public readonly decimal AvailableTotal;
+        public readonly decimal AvailableTotalBalace;
 
         public ProfitDistributionReport(IEnumerable<Participation> participations, decimal availableTotal)
         {

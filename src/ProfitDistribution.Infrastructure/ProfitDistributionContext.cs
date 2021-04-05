@@ -6,7 +6,7 @@ namespace ProfitDistribution.Infrastructure
 {
     public class ProfitDistributionContext
     {
-        private IFirebaseConfig config;
+        private readonly IFirebaseConfig config;
         public ProfitDistributionContext(string authSecret, string basePath)
         {
             config = new FirebaseConfig
