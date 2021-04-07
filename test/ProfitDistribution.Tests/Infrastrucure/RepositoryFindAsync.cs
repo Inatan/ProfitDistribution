@@ -8,7 +8,7 @@ namespace ProfitDistribution.Tests.Infrastrucure
     public class RepositoryFindAsync
     {
         [Fact]
-        public async Task WhenKeyExists_GetEntityObject()
+        public async Task WhenKeyExistsGetEntityObject()
         {
             string key = "0002949";
             var mock = new Mock<IRepository<object>>();

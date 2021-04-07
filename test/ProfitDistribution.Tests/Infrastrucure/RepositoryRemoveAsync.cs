@@ -8,7 +8,7 @@ namespace ProfitDistribution.Tests.Infrastrucure
     public class RepositoryRemoveAsync
     {
         [Fact]
-        public async Task WhenKeyExists_RemoveObject()
+        public async Task WhenKeyExistsRemoveObject()
         {
             string key = "0002949";
             var mock = new Mock<IRepository<object>>();

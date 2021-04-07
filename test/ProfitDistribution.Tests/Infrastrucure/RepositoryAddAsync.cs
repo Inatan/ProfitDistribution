@@ -8,7 +8,7 @@ namespace ProfitDistribution.Tests.Infrastrucure
     public class RepositoryAddAsync
     {
         [Fact]
-        public async Task AddNewEntity_EntityObjectIsNotNull()
+        public async Task AddNewEntityEntityObjectIsNotNull()
         {
             object obj = new object();
             string key = "000112";

@@ -8,7 +8,7 @@ namespace ProfitDistribution.Tests.Infrastrucure
     public class RepositoryUpdateAsync
     {
         [Fact]
-        public async Task WhenKeyExists_UpdateEntityObject()
+        public async Task WhenKeyExistsUpdateEntityObject()
         {
             object obj = new object();
             string key = "0002949";

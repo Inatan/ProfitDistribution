@@ -8,7 +8,7 @@ namespace ProfitDistribution.Tests.Infrastrucure
     public class RepositoryGetAllAsync
     {
         [Fact]
-        public async Task WhenKeyExists_GetDictOFObjects()
+        public async Task WhenKeyExistsGetDictOFObjects()
         {
             var mock = new Mock<IRepository<object>>();
             var repo = mock.Object;
