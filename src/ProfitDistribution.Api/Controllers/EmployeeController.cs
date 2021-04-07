@@ -73,36 +73,36 @@ namespace ProfitDistribution.Api.Controllers
             return Ok(employeeDTO);
         }
 
-        [HttpPost]
-        [SwaggerOperation(Summary = "Registra novo funcionário na base.")]
-        [ProducesResponseType(statusCode: 201, Type = typeof(EmployeeDTO))]
-        [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
-        [ProducesResponseType(statusCode: 409, Type = typeof(ErrorResponse))]
-        [ProducesResponseType(statusCode: 404, Type = typeof(ErrorResponse))]
-        public async Task<IActionResult> Post([FromBody] EmployeeDTO employeeDTO)
-        {
-            var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
+        //[HttpPost]
+        //[SwaggerOperation(Summary = "Registra novo funcionário na base.")]
+        //[ProducesResponseType(statusCode: 201, Type = typeof(EmployeeDTO))]
+        //[ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
+        //[ProducesResponseType(statusCode: 409, Type = typeof(ErrorResponse))]
+        //[ProducesResponseType(statusCode: 404, Type = typeof(ErrorResponse))]
+        //public async Task<IActionResult> Post([FromBody] EmployeeDTO employeeDTO)
+        //{
+        //    var mappedEmployee = _mapper.Map<Employee>(employeeDTO);
 
-            if (!ModelState.IsValid)
-            {
-                logError("Erro no envio de funcionário");
-                return BadRequest(ErrorResponse.FromModelState(ModelState));
-            }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        logError("Erro no envio de funcionário");
+        //        return BadRequest(ErrorResponse.FromModelState(ModelState));
+        //    }
 
-            bool isSuccess = await _services.InsertNewAsync(mappedEmployee);
-            if(isSuccess)
-            { 
-                var uri = Url==null ? "/": Url.Action("Get", new { matricula = mappedEmployee.RegistrationId });
-                return Created(uri, mappedEmployee);
-            }
-            else
-            {
-                ModelState.AddModelError("Employee", "Funcionário já possui matrícula cadastrada");
-                logError("Erro no envio de funcionários");
-                return Conflict(ErrorResponse.FromModelState(ModelState));
-            }
+        //    bool isSuccess = await _services.InsertNewAsync(mappedEmployee);
+        //    if(isSuccess)
+        //    { 
+        //        var uri = Url==null ? "/": Url.Action("Get", new { matricula = mappedEmployee.RegistrationId });
+        //        return Created(uri, mappedEmployee);
+        //    }
+        //    else
+        //    {
+        //        ModelState.AddModelError("Employee", "Funcionário já possui matrícula cadastrada");
+        //        logError("Erro no envio de funcionários");
+        //        return Conflict(ErrorResponse.FromModelState(ModelState));
+        //    }
             
-        }
+        //}
 
         [HttpPost]
         [SwaggerOperation(Summary = "Registra novos funcionários na base.")]
@@ -110,7 +110,7 @@ namespace ProfitDistribution.Api.Controllers
         [ProducesResponseType(statusCode: 500, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 409, Type = typeof(ErrorResponse))]
         [ProducesResponseType(statusCode: 404, Type = typeof(ErrorResponse))]
-        [Route("list")]
+        //[Route("list")]
         public async Task<IActionResult> PostList([FromBody] IList<EmployeeDTO> employeesDTO)
         {
             if (!ModelState.IsValid)
