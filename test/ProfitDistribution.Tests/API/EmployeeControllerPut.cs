@@ -15,7 +15,7 @@ namespace ProfitDistribution.Tests.API
     public class EmployeeControllerPut
     {
         [Fact]
-        public async Task WhenPostNewEmployee_ReturnsStatusCode200()
+        public async Task WhenPostNewEmployeeReturnsStatusCode200()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IEmployeeServices>();
@@ -41,7 +41,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenPutIsInvalidFormat_ReturnsStatusCode400()
+        public async Task WhenPutIsInvalidFormatReturnsStatusCode400()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IEmployeeServices>();
@@ -60,7 +60,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenPutWithException_ThrowsExcpetion()
+        public async Task WhenPutWithExceptionThrowsExcpetion()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IEmployeeServices>();

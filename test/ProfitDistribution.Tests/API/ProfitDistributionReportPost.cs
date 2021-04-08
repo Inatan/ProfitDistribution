@@ -14,7 +14,7 @@ namespace ProfitDistribution.Tests.API
     public class ProfitDistributionReportPost
     {
         [Fact]
-        public async Task WhenPostNewEmployee_ReturnsStatusCode200()
+        public async Task WhenPostNewEmployeeReturnsStatusCode200()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IReportServices>();
@@ -36,7 +36,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenPostIsInvalidFormat_ReturnsStatusCode400()
+        public async Task WhenPostIsInvalidFormatReturnsStatusCode400()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IReportServices>();
@@ -54,7 +54,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenDeleteWithException_ThrowsExcpetion()
+        public async Task WhenDeleteWithExceptionThrowsExcpetion()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IReportServices>();

@@ -16,7 +16,7 @@ namespace ProfitDistribution.Tests.API
     public class EmployeeControllerPost
     {
         [Fact]
-        public async Task WhenPostNewEmployee_ReturnsStatusCode201()
+        public async Task WhenPostNewEmployeeReturnsStatusCode201()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IEmployeeServices>();
@@ -44,7 +44,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenPostExistentEmployee_ReturnsStatusCode409()
+        public async Task WhenPostExistentEmployeeReturnsStatusCode409()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IEmployeeServices>();
@@ -72,7 +72,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenPostWithException_ThrowsExcpetion()
+        public async Task WhenPostWithExceptionThrowsExcpetion()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IEmployeeServices>();
@@ -91,7 +91,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenPotIsInvalidFormat_ReturnsStatusCode400()
+        public async Task WhenPotIsInvalidFormatReturnsStatusCode400()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IEmployeeServices>();
@@ -110,7 +110,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenPostListOfNewEmployees_ReturnsStatusCode201()
+        public async Task WhenPostListOfNewEmployeesReturnsStatusCode201()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IEmployeeServices>();

@@ -14,7 +14,7 @@ namespace ProfitDistribution.Tests.API
     public class EmployeeControllerGet
     {
         [Fact]
-        public async Task WhenGetEmployee_ReturnsStatusCode200()
+        public async Task WhenGetEmployeeReturnsStatusCode200()
         {
             string key = "0014319";
             var mockMapper = new Mock<IMapper>();
@@ -44,7 +44,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenGetEmployeeNotExists_ReturnsStatusCode404()
+        public async Task WhenGetEmployeeNotExistsReturnsStatusCode404()
         {
             string key = "0014319";
             var mockMapper = new Mock<IMapper>();
@@ -64,7 +64,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenGetAllEmployee_ReturnsStatusCode200()
+        public async Task WhenGetAllEmployeeReturnsStatusCode200()
         {
             
             var mockMapper = new Mock<IMapper>();
@@ -84,7 +84,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenGetWithException_ThrowsExcpetion()
+        public async Task WhenGetWithExceptionThrowsExcpetion()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IEmployeeServices>();

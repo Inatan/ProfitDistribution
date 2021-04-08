@@ -14,7 +14,7 @@ namespace ProfitDistribution.Tests.API
     public class EmployeeControllerDelete
     {
         [Fact]
-        public async Task WhenDeleteEmployee_ReturnsStatusCode204()
+        public async Task WhenDeleteEmployeeReturnsStatusCode204()
         {
             string key = "0014319";
             var mockMapper = new Mock<IMapper>();
@@ -45,7 +45,7 @@ namespace ProfitDistribution.Tests.API
         }
 
         [Fact]
-        public async Task WhenDeleteEmployeeNotExists_ReturnsStatusCode404()
+        public async Task WhenDeleteEmployeeNotExistsReturnsStatusCode404()
         {
             string key = "0014319";
             var mockMapper = new Mock<IMapper>();
@@ -64,7 +64,7 @@ namespace ProfitDistribution.Tests.API
             Assert.Equal(404, statusCode);
         }
 
-        public async Task WhenDeleteWithException_ThrowsExcpetion()
+        public async Task WhenDeleteWithExceptionThrowsExcpetion()
         {
             var mockMapper = new Mock<IMapper>();
             var mock = new Mock<IEmployeeServices>();
