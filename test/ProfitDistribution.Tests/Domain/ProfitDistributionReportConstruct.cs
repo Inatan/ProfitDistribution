@@ -12,7 +12,7 @@ namespace ProfitDistribution.Tests.Domain
         [Theory]
         [InlineData(500000, 72073.40)]
         [InlineData(300000, -127926.60)]
-        void WhenConstructProfitDistribution_ReturnsExpectValues(decimal valueToDistribution, decimal expectedBalance)
+        void WhenConstructProfitDistributionReturnsExpectValues(decimal valueToDistribution, decimal expectedBalance)
         {
             Dictionary<string,Employee> employees =
                 new Dictionary<string, Employee>
